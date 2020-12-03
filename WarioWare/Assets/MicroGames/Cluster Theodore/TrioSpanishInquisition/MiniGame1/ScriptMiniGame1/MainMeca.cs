@@ -11,69 +11,338 @@ namespace SpanishInquisition
         {
             private int QTEGen;
             private int numberOfButtons;
-            private bool waitingForButton;
+            private int buttonNumber;
             private bool gameDone;
+            private bool correctButton;
+            public GameObject activeButton;
 
             void Update()
             {
-                if (waitingForButton == false && numberOfButtons < 3)
+                if (numberOfButtons < 3)
                 {
                     QTEGen = Random.Range(1, 5);
-                    waitingForButton = true;                  
+                }
+
+                if (numberOfButtons == 3)
+                {
+                    StartCoroutine(GameStart());
                 }
 
                 if (QTEGen == 1)
                 {
                     Debug.Log("Bouton A");
 
-                    if (Input.GetButtonDown("A_Button"))
+                    if (numberOfButtons == 0)
                     {
-                        waitingForButton = false;
-                        QTEGen = 0;
-                        numberOfButtons++;
+                        activeButton = GameObject.Find("/Input/Buttons A/Button A 1");
+                        activeButton.SetActive(true);
                     }
+
+                    if (numberOfButtons == 1)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons A/Button A 2");
+                        activeButton.SetActive(true);
+                    }
+
+                    if (numberOfButtons == 2)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons A/Button A 3");
+                        activeButton.SetActive(true);
+                    }
+
+                    /*if (numberOfButtons == 3)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons A/Button A 4");
+                        activeButton.SetActive(true);
+                    }*/
+
+                    QTEGen = 0;
+                    numberOfButtons++;
                 }
 
                 if (QTEGen == 2)
                 {
                     Debug.Log("Bouton B");
 
-                    if (Input.GetButtonDown("B_Button"))
+                    if (numberOfButtons == 0)
                     {
-                        waitingForButton = false;
-                        QTEGen = 0;
-                        numberOfButtons++;
+                        activeButton = GameObject.Find("/Input/Buttons B/Button B 1");
+                        activeButton.SetActive(true);
                     }
+
+                    if (numberOfButtons == 1)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons B/Button B 2");
+                        activeButton.SetActive(true);
+                    }
+
+                    if (numberOfButtons == 2)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons B/Button B 3");
+                        activeButton.SetActive(true);
+                    }
+
+                    QTEGen = 0;
+                    numberOfButtons++;
                 }
+
 
                 if (QTEGen == 3)
                 {
-                    Debug.Log("Bouton X");  
+                    Debug.Log("Bouton X");
 
-                    if (Input.GetButtonDown("X_Button"))
+                    if (numberOfButtons == 0)
                     {
-                        waitingForButton = false;
-                        QTEGen = 0;
-                        numberOfButtons++;
+                        activeButton = GameObject.Find("/Input/Buttons X/Button X 1");
+                        activeButton.SetActive(true);
                     }
+
+                    if (numberOfButtons == 1)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons X/Button X 2");
+                        activeButton.SetActive(true);
+                    }
+
+                    if (numberOfButtons == 2)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons X/Button X 3");
+                        activeButton.SetActive(true);
+                    }
+
+                    QTEGen = 0;
+                    numberOfButtons++;
                 }
 
                 if (QTEGen == 4)
                 {
                     Debug.Log("Bouton Y");
 
-                    if (Input.GetButtonDown("Y_Button"))
+                    if (numberOfButtons == 0)
                     {
-                        waitingForButton = false;
-                        QTEGen = 0;
-                        numberOfButtons++;
+                        activeButton = GameObject.Find("/Input/Buttons Y/Button Y 1");
+                        activeButton.SetActive(true);
                     }
+
+                    if (numberOfButtons == 1)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons Y/Button Y 2");
+                        activeButton.SetActive(true);
+                    }
+
+                    if (numberOfButtons == 2)
+                    {
+                        activeButton = GameObject.Find("/Input/Buttons Y/Button Y 3");
+                        activeButton.SetActive(true);
+                    }
+
+                    QTEGen = 0;
+                    numberOfButtons++;
                 }
 
-                if (numberOfButtons == 3 && gameDone == false)
+
+                
+
+                if (buttonNumber == 3 && gameDone == false)
                 {
                     Debug.Log("You win !)");
                     gameDone = true;
+                }
+
+                IEnumerator GameStart()
+                {
+                    if (buttonNumber == 0)
+                    {
+                        if (GameObject.Find("/Input/Buttons A/Button A 1").activeSelf == true)
+                        {
+                            if (Input.GetButton("A_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            else if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons B/Button B 1").activeSelf == true)
+                        {
+                            if (Input.GetButton("B_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            else if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons X/Button X 1").activeSelf == true)
+                        {
+                            if (Input.GetButton("X_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+
+                        }
+
+                        if (GameObject.Find("/Input/Buttons Y/Button Y 1").activeSelf == true)
+                        {
+                            if (Input.GetButton("Y_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+                    }
+
+                    yield return new WaitForSeconds(0);
+                    correctButton = false;
+
+                    if (buttonNumber == 1)
+                    {
+                        if (GameObject.Find("/Input/Buttons A/Button A 2").activeSelf == true)
+                        {
+                            if (Input.GetButton("A_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons B/Button B 2").activeSelf == true)
+                        {
+                            if (Input.GetButton("B_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons X/Button X 2").activeSelf == true)
+                        {
+                            if (Input.GetButton("X_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons Y/Button Y 2").activeSelf == true)
+                        {
+                            if (Input.GetButton("Y_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+                    }
+
+                    if (buttonNumber == 2)
+                    {
+                        if (GameObject.Find("/Input/Buttons A/Button A 3").activeSelf == true)
+                        {
+                            if (Input.GetButton("A_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons B/Button B 3").activeSelf == true)
+                        {
+                            if (Input.GetButton("B_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons X/Button X 3").activeSelf == true)
+                        {
+                            if (Input.GetButton("X_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }
+
+                        if (GameObject.Find("/Input/Buttons Y/Button Y 3").activeSelf == true)
+                        {
+                            if (Input.GetButton("Y_Button") && correctButton == false)
+                            {
+                                Debug.Log("Success");
+                                correctButton = true;
+                                buttonNumber++;
+                            }
+
+                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                            {
+                                Debug.Log("Fail");
+                            }
+                        }                   
+                    }
+                    yield return null;
                 }
             }
         }
