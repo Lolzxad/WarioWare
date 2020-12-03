@@ -10,62 +10,70 @@ namespace SpanishInquisition
         public class MainMeca : MonoBehaviour
         {
             private int QTEGen;
-            private bool WaitingForButton;
-            private int NumberOfButtons = 3;
+            private int numberOfButtons;
+            private bool waitingForButton;
+            private bool gameDone;
 
             void Update()
             {
-                for (int i = 0; i < NumberOfButtons; i++)
+                if (waitingForButton == false && numberOfButtons < 3)
                 {
-                    if (WaitingForButton == false)
+                    QTEGen = Random.Range(1, 5);
+                    waitingForButton = true;                  
+                }
+
+                if (QTEGen == 1)
+                {
+                    Debug.Log("Bouton A");
+
+                    if (Input.GetButtonDown("A_Button"))
                     {
-                        QTEGen = Random.Range(1, 5);
-                        WaitingForButton = true;                  
+                        waitingForButton = false;
+                        QTEGen = 0;
+                        numberOfButtons++;
                     }
+                }
 
-                    if (QTEGen == 1)
+                if (QTEGen == 2)
+                {
+                    Debug.Log("Bouton B");
+
+                    if (Input.GetButtonDown("B_Button"))
                     {
-                        Debug.Log("Bouton A");
-
-                        if (Input.GetButtonDown("A_Button"))
-                        {
-                            WaitingForButton = false;
-                            QTEGen = 0;
-                        }
+                        waitingForButton = false;
+                        QTEGen = 0;
+                        numberOfButtons++;
                     }
+                }
 
-                    if (QTEGen == 2)
+                if (QTEGen == 3)
+                {
+                    Debug.Log("Bouton X");  
+
+                    if (Input.GetButtonDown("X_Button"))
                     {
-                        Debug.Log("Bouton B");
-
-                        if (Input.GetButtonDown("B_Button"))
-                        {
-                            WaitingForButton = false;
-                            QTEGen = 0;
-                        }
+                        waitingForButton = false;
+                        QTEGen = 0;
+                        numberOfButtons++;
                     }
+                }
 
-                    if (QTEGen == 3)
+                if (QTEGen == 4)
+                {
+                    Debug.Log("Bouton Y");
+
+                    if (Input.GetButtonDown("Y_Button"))
                     {
-                        Debug.Log("Bouton X");
-
-                        if (Input.GetButtonDown("X_Button"))
-                        {
-                            WaitingForButton = false;
-                            QTEGen = 0;
-                        }
+                        waitingForButton = false;
+                        QTEGen = 0;
+                        numberOfButtons++;
                     }
+                }
 
-                    if (QTEGen == 4)
-                    {
-                        Debug.Log("Bouton Y");
-
-                        if (Input.GetButtonDown("Y_Button"))
-                        {
-                            WaitingForButton = false;
-                            QTEGen = 0;
-                        }
-                    }
+                if (numberOfButtons == 3 && gameDone == false)
+                {
+                    Debug.Log("You win !)");
+                    gameDone = true;
                 }
             }
         }
