@@ -10,62 +10,61 @@ namespace SpanishInquisition
         public class MainMeca : MonoBehaviour
         {
             private int QTEGen;
-            private bool WaitingForKey;
-            private bool CorrectKey;
+            private bool WaitingForButton;
+            private int NumberOfButtons = 3;
 
             void Update()
             {
-                if (WaitingForKey == false)
+                for (int i = 0; i < NumberOfButtons; i++)
                 {
-                    QTEGen = Random.Range(1, 5);
-                    WaitingForKey = true;                  
-                }
-
-                if (QTEGen == 1)
-                {
-                    Debug.Log("Bouton A");
-
-                    if (Input.GetButtonDown("A_Button"))
+                    if (WaitingForButton == false)
                     {
-                        CorrectKey = true;
-                        WaitingForKey = false;
-                        QTEGen = 0;
+                        QTEGen = Random.Range(1, 5);
+                        WaitingForButton = true;                  
                     }
-                }
 
-                if (QTEGen == 2)
-                {
-                    Debug.Log("Bouton B");
-
-                    if (Input.GetButtonDown("B_Button"))
+                    if (QTEGen == 1)
                     {
-                        CorrectKey = true;
-                        WaitingForKey = false;
-                        QTEGen = 0;
+                        Debug.Log("Bouton A");
+
+                        if (Input.GetButtonDown("A_Button"))
+                        {
+                            WaitingForButton = false;
+                            QTEGen = 0;
+                        }
                     }
-                }
 
-                if (QTEGen == 3)
-                {
-                    Debug.Log("Bouton X");
-
-                    if (Input.GetButtonDown("X_Button"))
+                    if (QTEGen == 2)
                     {
-                        CorrectKey = true;
-                        WaitingForKey = false;
-                        QTEGen = 0;
+                        Debug.Log("Bouton B");
+
+                        if (Input.GetButtonDown("B_Button"))
+                        {
+                            WaitingForButton = false;
+                            QTEGen = 0;
+                        }
                     }
-                }
 
-                if (QTEGen == 4)
-                {
-                    Debug.Log("Bouton Y");
-
-                    if (Input.GetButtonDown("Y_Button"))
+                    if (QTEGen == 3)
                     {
-                        CorrectKey = true;
-                        WaitingForKey = false;
-                        QTEGen = 0;
+                        Debug.Log("Bouton X");
+
+                        if (Input.GetButtonDown("X_Button"))
+                        {
+                            WaitingForButton = false;
+                            QTEGen = 0;
+                        }
+                    }
+
+                    if (QTEGen == 4)
+                    {
+                        Debug.Log("Bouton Y");
+
+                        if (Input.GetButtonDown("Y_Button"))
+                        {
+                            WaitingForButton = false;
+                            QTEGen = 0;
+                        }
                     }
                 }
             }
