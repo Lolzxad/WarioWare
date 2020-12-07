@@ -159,234 +159,233 @@ namespace SpanishInquisition
 
                 IEnumerator GameStart()
                 {
-                    if (buttonNumber == 0)
+                    switch (buttonNumber)
                     {
-                        if (GameObject.Find("/Input/Buttons A/Button A 1").activeSelf == true)
-                        {
-                            if (Input.GetButton("A_Button") && correctButton == false)
+
+                        case 2:
+
+                            if (GameObject.Find("/Input/Buttons A/Button A 3").activeSelf == true)
                             {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
+                                if (Input.GetButton("A_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+
+                                if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
                             }
 
-                            else if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            if (GameObject.Find("/Input/Buttons B/Button B 3").activeSelf == true)
                             {
-                                Debug.Log("Fail");
-                                sMngr.PlayWrongButton();
-                            }
-                        }
+                                if (Input.GetButton("B_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
 
-                        if (GameObject.Find("/Input/Buttons B/Button B 1").activeSelf == true)
-                        {
-                            if (Input.GetButton("B_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
-                            }
-
-                            else if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
-                            {
-                                Debug.Log("Fail");
-                                sMngr.PlayWrongButton();
-                            }
-                        }
-
-                        if (GameObject.Find("/Input/Buttons X/Button X 1").activeSelf == true)
-                        {
-                            if (Input.GetButton("X_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
+                                if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
                             }
 
-                            else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                            if (GameObject.Find("/Input/Buttons X/Button X 3").activeSelf == true)
                             {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
+                                if (Input.GetButton("X_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+
+                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
                             }
 
-                        }
-
-                        if (GameObject.Find("/Input/Buttons Y/Button Y 1").activeSelf == true)
-                        {
-                            if (Input.GetButton("Y_Button") && correctButton == false)
+                            if (GameObject.Find("/Input/Buttons Y/Button Y 3").activeSelf == true)
                             {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
+                                if (Input.GetButton("Y_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+
+                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
+                            }
+                            break;
+
+                        case 1:
+
+                            if (GameObject.Find("/Input/Buttons A/Button A 2").activeSelf == true)
+                            {
+                                if (Input.GetButton("A_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+                            
+                                if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
+                            }
+                            
+                            if (GameObject.Find("/Input/Buttons B/Button B 2").activeSelf == true)
+                            {
+                                if (Input.GetButton("B_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+                            
+                                if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
+                            }
+                            
+                            if (GameObject.Find("/Input/Buttons X/Button X 2").activeSelf == true)
+                            {
+                                if (Input.GetButton("X_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+                            
+                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
+                            }
+                            
+                            if (GameObject.Find("/Input/Buttons Y/Button Y 2").activeSelf == true)
+                            {
+                                if (Input.GetButton("Y_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+                            
+                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
+                            }
+                            break;
+
+                        default:
+                            if (GameObject.Find("/Input/Buttons A/Button A 1").activeSelf == true)
+                            {
+                                if (Input.GetButton("A_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
+
+                                else if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    Debug.Log("Fail");
+                                    sMngr.PlayWrongButton();
+                                }
                             }
 
-                            else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                            if (GameObject.Find("/Input/Buttons B/Button B 1").activeSelf == true)
                             {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
-                    }
+                                if (Input.GetButton("B_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
 
-                    correctButton = false;
-
-                    if (buttonNumber == 1 && correctButton == false)
-                    {
-                        if (GameObject.Find("/Input/Buttons A/Button A 2").activeSelf == true)
-                        {
-                            if (Input.GetButton("A_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
+                                else if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    Debug.Log("Fail");
+                                    sMngr.PlayWrongButton();
+                                }
                             }
 
-                            if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                            if (GameObject.Find("/Input/Buttons X/Button X 1").activeSelf == true)
                             {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
+                                if (Input.GetButton("X_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
 
-                        if (GameObject.Find("/Input/Buttons B/Button B 2").activeSelf == true)
-                        {
-                            if (Input.GetButton("B_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
-                            }
+                                else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
 
-                            if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
-                            {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
-
-                        if (GameObject.Find("/Input/Buttons X/Button X 2").activeSelf == true)
-                        {
-                            if (Input.GetButton("X_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
-                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                            if (GameObject.Find("/Input/Buttons Y/Button Y 1").activeSelf == true)
                             {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
+                                if (Input.GetButton("Y_Button"))
+                                {
+                                    Debug.Log("Success");
+                                    sMngr.PlayGoodButton();
+                                    correctButton = true;
+                                    buttonNumber++;
+                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                }
 
-                        if (GameObject.Find("/Input/Buttons Y/Button Y 2").activeSelf == true)
-                        {
-                            if (Input.GetButton("Y_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
+                                else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                                {
+                                    sMngr.PlayWrongButton();
+                                    Debug.Log("Fail");
+                                }
                             }
-
-                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
-                            {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
-                    }
-
-                    correctButton = false;
-
-                    if (buttonNumber == 2 && correctButton == false)
-                    {
-                        if (GameObject.Find("/Input/Buttons A/Button A 3").activeSelf == true)
-                        {
-                            if (Input.GetButton("A_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
-                            }
-
-                            if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
-                            {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
-
-                        if (GameObject.Find("/Input/Buttons B/Button B 3").activeSelf == true)
-                        {
-                            if (Input.GetButton("B_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
-                            }
-
-                            if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
-                            {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
-
-                        if (GameObject.Find("/Input/Buttons X/Button X 3").activeSelf == true)
-                        {
-                            if (Input.GetButton("X_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
-                            }
-
-                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
-                            {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
-
-                        if (GameObject.Find("/Input/Buttons Y/Button Y 3").activeSelf == true)
-                        {
-                            if (Input.GetButton("Y_Button") && correctButton == false)
-                            {
-                                Debug.Log("Success");
-                                sMngr.PlayGoodButton();
-                                correctButton = true;
-                                buttonNumber++;
-                                drapeau.transform.position += new Vector3(0, 1, 0);
-                            }
-
-                            if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
-                            {
-                                sMngr.PlayWrongButton();
-                                Debug.Log("Fail");
-                            }
-                        }
+                            break;
                     }
                     yield return null;
                 }
