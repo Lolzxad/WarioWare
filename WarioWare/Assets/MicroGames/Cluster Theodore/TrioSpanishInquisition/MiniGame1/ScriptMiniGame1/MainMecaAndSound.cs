@@ -197,12 +197,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("X_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
 
@@ -213,12 +215,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("Y_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -234,12 +238,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("A_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -249,12 +255,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("B_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -264,12 +272,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("X_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -279,12 +289,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("Y_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -297,12 +309,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("A_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -312,12 +326,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("B_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -327,12 +343,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("X_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
@@ -342,12 +360,14 @@ namespace SpanishInquisition
                             if (Input.GetButton("Y_Button") && correctButton == false)
                             {
                                 Debug.Log("Success");
+                                sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
                             {
+                                sMngr.PlayWrongButton();
                                 Debug.Log("Fail");
                             }
                         }
