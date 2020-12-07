@@ -20,7 +20,7 @@ namespace SpanishInquisition
 
             private void Start()
             {
-                sMngr = GetComponent<LTN_SoundManager>();
+                sMngr = GetComponentInChildren<LTN_SoundManager>();
             }
             void Update()
             {
