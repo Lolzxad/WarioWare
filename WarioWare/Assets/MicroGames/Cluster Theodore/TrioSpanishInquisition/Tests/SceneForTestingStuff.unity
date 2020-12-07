@@ -1612,6 +1612,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodButton: {fileID: 1079593287}
   wrongButton: {fileID: 1079593286}
+  rFlag1: {fileID: 1079593290}
+  rFlag2: {fileID: 1079593289}
+  rFlag3: {fileID: 1079593291}
 --- !u!1 &1132780814
 GameObject:
   m_ObjectHideFlags: 0

@@ -150,6 +150,7 @@ namespace SpanishInquisition
 
                 if (buttonNumber == 3 && gameDone == false)
                 {
+                    sMngr.PlayFlagFirst();
                     Debug.Log("You win !)");
                     gameDone = true;
                 }
