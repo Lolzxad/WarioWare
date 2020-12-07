@@ -214,10 +214,9 @@ namespace SpanishInquisition
                         }
                     }
 
-                    yield return new WaitForSeconds(0);
                     correctButton = false;
 
-                    if (buttonNumber == 1)
+                    if (buttonNumber == 1 && correctButton == false)
                     {
                         if (GameObject.Find("/Input/Buttons A/Button A 2").activeSelf == true)
                         {
@@ -280,7 +279,9 @@ namespace SpanishInquisition
                         }
                     }
 
-                    if (buttonNumber == 2)
+                    correctButton = false;
+
+                    if (buttonNumber == 2 && correctButton == false)
                     {
                         if (GameObject.Find("/Input/Buttons A/Button A 3").activeSelf == true)
                         {

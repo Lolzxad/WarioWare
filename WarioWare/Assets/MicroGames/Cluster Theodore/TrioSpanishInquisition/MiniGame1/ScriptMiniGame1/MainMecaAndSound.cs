@@ -14,16 +14,20 @@ namespace SpanishInquisition
             private int buttonNumber;
             private bool gameDone;
             private bool correctButton;
-            public GameObject activeButton;
+            private GameObject activeButton;
+            private Transform drapeau;
 
             private LTN_SoundManager sMngr;
 
             private void Start()
             {
                 sMngr = GetComponentInChildren<LTN_SoundManager>();
+                drapeau = GameObject.Find("/Graphs/TW_Drapeau").transform;              
             }
-            void Update()
+        
+            private void Update()
             {
+
                 if (numberOfButtons < 3)
                 {
                     QTEGen = Random.Range(1, 5);
@@ -146,8 +150,6 @@ namespace SpanishInquisition
                 }
 
 
-
-
                 if (buttonNumber == 3 && gameDone == false)
                 {
                     sMngr.PlayFlagFirst();
@@ -167,6 +169,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             else if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
@@ -184,6 +187,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             else if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
@@ -201,6 +205,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
@@ -219,6 +224,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
@@ -229,10 +235,9 @@ namespace SpanishInquisition
                         }
                     }
 
-                    yield return new WaitForSeconds(0);
                     correctButton = false;
 
-                    if (buttonNumber == 1)
+                    if (buttonNumber == 1 && correctButton == false)
                     {
                         if (GameObject.Find("/Input/Buttons A/Button A 2").activeSelf == true)
                         {
@@ -242,6 +247,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
@@ -259,6 +265,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
@@ -276,6 +283,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
@@ -293,6 +301,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
@@ -303,7 +312,9 @@ namespace SpanishInquisition
                         }
                     }
 
-                    if (buttonNumber == 2)
+                    correctButton = false;
+
+                    if (buttonNumber == 2 && correctButton == false)
                     {
                         if (GameObject.Find("/Input/Buttons A/Button A 3").activeSelf == true)
                         {
@@ -313,6 +324,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
@@ -330,6 +342,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
@@ -347,6 +360,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
@@ -364,6 +378,7 @@ namespace SpanishInquisition
                                 sMngr.PlayGoodButton();
                                 correctButton = true;
                                 buttonNumber++;
+                                drapeau.transform.position += new Vector3(0, 1, 0);
                             }
 
                             if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
