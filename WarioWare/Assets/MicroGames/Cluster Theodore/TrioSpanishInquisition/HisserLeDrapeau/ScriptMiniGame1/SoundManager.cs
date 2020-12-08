@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpanishInquisition
 {
-    namespace MiniGame1
+    namespace HisserLeDrapeau
     {
         public class SoundManager : MonoBehaviour
         {
