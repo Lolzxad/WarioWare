@@ -7,7 +7,7 @@ namespace SpanishInquisition
 {
     namespace MiniGame1
     {
-        public class MainMecaAndSound : MonoBehaviour
+        public class MainMecaAndSound : TimedBehaviour
         {
             private int QTEGen;
             private int numberOfButtons;
@@ -21,14 +21,16 @@ namespace SpanishInquisition
 
             private LTN_SoundManager sMngr;
 
-            private void Start()
+            public override void Start()
             {
+                base.Start();
                 sMngr = GetComponentInChildren<LTN_SoundManager>();
                 drapeau = GameObject.Find("/Graphs/TW_Drapeau").transform;
             }
         
-            private void Update() 
-            {                
+            public override void FixedUpdate() 
+            {
+                base.FixedUpdate();
 
                 if (numberOfButtons < 3)
                 {
