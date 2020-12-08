@@ -62,12 +62,6 @@ namespace SpanishInquisition
                         activeButton.SetActive(true);
                     }
 
-                    /*if (numberOfButtons == 3)
-                    {
-                        activeButton = GameObject.Find("/Input/Buttons A/Button A 4");
-                        activeButton.SetActive(true);
-                    }*/
-
                     QTEGen = 0;
                     numberOfButtons++;
                 }
@@ -157,6 +151,8 @@ namespace SpanishInquisition
                     sMngr.PlayFlagFirst();
                     Debug.Log("You win !)");
                     gameDone = true;
+                    GameObject.Find("/Graphs/Victory/TW_TypoVictoire").SetActive(true);
+                    GameObject.Find("/Graphs/Victory/TW_FeedbackVictoire").SetActive(true);
                 }
 
                 if (gameDone == true)
