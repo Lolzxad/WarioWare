@@ -13,27 +13,29 @@ namespace SpanishInquisition
             private int numberOfButtons;
             private int buttonNumber;
             private bool gameDone;
-            private bool correctButton;
             private GameObject activeButton;
             private Transform drapeau;
+            public Transform flagFirst;
+            public Transform flagSecond;
+            public Transform flagThird;
 
             private LTN_SoundManager sMngr;
 
             private void Start()
             {
                 sMngr = GetComponentInChildren<LTN_SoundManager>();
-                drapeau = GameObject.Find("/Graphs/TW_Drapeau").transform;              
+                drapeau = GameObject.Find("/Graphs/TW_Drapeau").transform;
             }
         
-            private void Update()
-            {
+            private void Update() 
+            {                
 
                 if (numberOfButtons < 3)
                 {
                     QTEGen = Random.Range(1, 5);
                 }
 
-                if (numberOfButtons == 3)
+                if (numberOfButtons == 3 && gameDone == false)
                 {
                     StartCoroutine(GameStart());
                 }
@@ -151,10 +153,18 @@ namespace SpanishInquisition
 
 
                 if (buttonNumber == 3 && gameDone == false)
-                {
+                {                
                     sMngr.PlayFlagFirst();
                     Debug.Log("You win !)");
                     gameDone = true;
+                }
+
+                if (gameDone == true)
+                {
+                    if (drapeau.position.y < flagThird.position.y)
+                    {
+                        drapeau.Translate(Vector3.up * Time.deltaTime * 10);
+                    }
                 }
 
                 IEnumerator GameStart()
@@ -164,18 +174,23 @@ namespace SpanishInquisition
 
                         case 2:
 
+                            if (drapeau.position.y < flagSecond.position.y)
+                            {
+                                drapeau.Translate(Vector3.up * Time.deltaTime * 10);
+                            }
+
                             if (GameObject.Find("/Input/Buttons A/Button A 3").activeSelf == true)
                             {
-                                if (Input.GetButton("A_Button"))
+                                if (Input.GetButtonDown("A_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("B_Button") || Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -184,16 +199,16 @@ namespace SpanishInquisition
 
                             if (GameObject.Find("/Input/Buttons B/Button B 3").activeSelf == true)
                             {
-                                if (Input.GetButton("B_Button"))
+                                if (Input.GetButtonDown("B_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -202,16 +217,16 @@ namespace SpanishInquisition
 
                             if (GameObject.Find("/Input/Buttons X/Button X 3").activeSelf == true)
                             {
-                                if (Input.GetButton("X_Button"))
+                                if (Input.GetButtonDown("X_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("B_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -220,16 +235,16 @@ namespace SpanishInquisition
 
                             if (GameObject.Find("/Input/Buttons Y/Button Y 3").activeSelf == true)
                             {
-                                if (Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("Y_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                                if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("B_Button") || Input.GetButtonDown("X_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -239,18 +254,23 @@ namespace SpanishInquisition
 
                         case 1:
 
+                            if (drapeau.position.y < flagFirst.position.y)
+                            {
+                                drapeau.Translate(Vector3.up * Time.deltaTime * 10);
+                            }                          
+
                             if (GameObject.Find("/Input/Buttons A/Button A 2").activeSelf == true)
                             {
-                                if (Input.GetButton("A_Button"))
+                                if (Input.GetButtonDown("A_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
                             
-                                if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("B_Button") || Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -259,16 +279,16 @@ namespace SpanishInquisition
                             
                             if (GameObject.Find("/Input/Buttons B/Button B 2").activeSelf == true)
                             {
-                                if (Input.GetButton("B_Button"))
+                                if (Input.GetButtonDown("B_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
                             
-                                if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -277,16 +297,16 @@ namespace SpanishInquisition
                             
                             if (GameObject.Find("/Input/Buttons X/Button X 2").activeSelf == true)
                             {
-                                if (Input.GetButton("X_Button"))
+                                if (Input.GetButtonDown("X_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
                             
-                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("B_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -295,16 +315,16 @@ namespace SpanishInquisition
                             
                             if (GameObject.Find("/Input/Buttons Y/Button Y 2").activeSelf == true)
                             {
-                                if (Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("Y_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
                             
-                                if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                                if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("B_Button") || Input.GetButtonDown("X_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -315,16 +335,16 @@ namespace SpanishInquisition
                         default:
                             if (GameObject.Find("/Input/Buttons A/Button A 1").activeSelf == true)
                             {
-                                if (Input.GetButton("A_Button"))
+                                if (Input.GetButtonDown("A_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                else if (Input.GetButton("B_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                else if (Input.GetButtonDown("B_Button") || Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     Debug.Log("Fail");
                                     sMngr.PlayWrongButton();
@@ -333,16 +353,16 @@ namespace SpanishInquisition
 
                             if (GameObject.Find("/Input/Buttons B/Button B 1").activeSelf == true)
                             {
-                                if (Input.GetButton("B_Button"))
+                                if (Input.GetButtonDown("B_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                else if (Input.GetButton("A_Button") || Input.GetButton("X_Button") || Input.GetButton("Y_Button"))
+                                else if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     Debug.Log("Fail");
                                     sMngr.PlayWrongButton();
@@ -351,16 +371,16 @@ namespace SpanishInquisition
 
                             if (GameObject.Find("/Input/Buttons X/Button X 1").activeSelf == true)
                             {
-                                if (Input.GetButton("X_Button"))
+                                if (Input.GetButtonDown("X_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("Y_Button"))
+                                else if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("B_Button") || Input.GetButtonDown("Y_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
@@ -370,16 +390,16 @@ namespace SpanishInquisition
 
                             if (GameObject.Find("/Input/Buttons Y/Button Y 1").activeSelf == true)
                             {
-                                if (Input.GetButton("Y_Button"))
+                                if (Input.GetButtonDown("Y_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    correctButton = true;
+                                    
                                     buttonNumber++;
-                                    drapeau.transform.position += new Vector3(0, 5, 0);
+                                    //drapeau.transform.Translate(0, 5, 0);
                                 }
 
-                                else if (Input.GetButton("A_Button") || Input.GetButton("B_Button") || Input.GetButton("X_Button"))
+                                else if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("B_Button") || Input.GetButtonDown("X_Button"))
                                 {
                                     sMngr.PlayWrongButton();
                                     Debug.Log("Fail");
