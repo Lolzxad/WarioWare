@@ -5,8 +5,12 @@ using UnityEngine;
 
 namespace SpanishInquisition
 {
-    namespace MiniGame1
+    namespace HisserLeDrapeau
     {
+        /// <summary>
+        /// Adel Ahmed-Yahia
+        /// </summary>
+
         public class MainMecaAndSound : TimedBehaviour
         {
             private int QTEGen;
