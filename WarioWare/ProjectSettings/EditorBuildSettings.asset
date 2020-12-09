@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Common/TestingScene/TestingScene.unity
     guid: 2064f4f6dc1de1746a019d595f5da6b3
+  - enabled: 1
+    path: Assets/MicroGames/Cluster Theodore/TrioSpanishInquisition/HisserLeDrapeau/HisserLeDrapeau.unity
+    guid: d1d641469f4b9814fba98db1b859e31e
   m_configObjects: {}
