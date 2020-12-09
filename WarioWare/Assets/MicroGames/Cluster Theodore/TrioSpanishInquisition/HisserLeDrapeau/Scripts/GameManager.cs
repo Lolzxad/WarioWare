@@ -65,6 +65,10 @@ namespace SpanishInquisition
                 {
                     sMngr.PlayVictory();
                     Manager.Instance.Result(true);
+                    sMngr.PlayFlagFirst();
+                    Debug.Log("You win !)");
+                    GameObject.Find("/Graphs/Victory/Typo victoire").SetActive(true);
+                    GameObject.Find("/Graphs/Victory/Feedback victoire").SetActive(true);
                 }
             }
 
@@ -85,15 +89,7 @@ namespace SpanishInquisition
                 if (hardGame == true)
                 {
                     StartCoroutine(GameStartDiffHard());
-                }
-
-                if (gameDone == true)
-                {                
-                    sMngr.PlayFlagFirst();
-                    Debug.Log("You win !)");
-                    GameObject.Find("/Graphs/Victory/Typo victoire").SetActive(true);
-                    GameObject.Find("/Graphs/Victory/Feedback victoire").SetActive(true);                  
-                }                
+                }              
             }
 
             IEnumerator GameStartDiffEasy()
@@ -1180,7 +1176,7 @@ namespace SpanishInquisition
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    GameObject.Find("/Input/Buttons X/Button X 4 5").SetActive(true);
+                                    GameObject.Find("/Input/Buttons X/Button X 5 A").SetActive(true);
                                     buttonNumber++;
                                     //drapeau.transform.Translate(0, 5, 0);
                                 }
@@ -1221,13 +1217,13 @@ namespace SpanishInquisition
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
                             }
 
-                            if (GameObject.Find("/Input/Buttons A/Button A 5").activeSelf == true)
+                            if (GameObject.Find("/Input/Buttons A/Button A 4").activeSelf == true)
                             {
                                 if (Input.GetButton("A_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    GameObject.Find("/Input/Buttons A/Button A 5 A").SetActive(true);
+                                    GameObject.Find("/Input/Buttons A/Button A 4 A").SetActive(true);
                                     buttonNumber++;
                                     //drapeau.transform.Translate(0, 5, 0);
                                 }
@@ -1239,13 +1235,13 @@ namespace SpanishInquisition
                                 }
                             }
 
-                            if (GameObject.Find("/Input/Buttons B/Button B 5").activeSelf == true)
+                            if (GameObject.Find("/Input/Buttons B/Button B 4").activeSelf == true)
                             {
                                 if (Input.GetButton("B_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    GameObject.Find("/Input/Buttons B/Button B 5 A").SetActive(true);
+                                    GameObject.Find("/Input/Buttons B/Button B 4 A").SetActive(true);
                                     buttonNumber++;
                                     //drapeau.transform.Translate(0, 5, 0);
                                 }
@@ -1257,13 +1253,13 @@ namespace SpanishInquisition
                                 }
                             }
 
-                            if (GameObject.Find("/Input/Buttons X/Button X 5").activeSelf == true)
+                            if (GameObject.Find("/Input/Buttons X/Button X 4").activeSelf == true)
                             {
                                 if (Input.GetButton("X_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    GameObject.Find("/Input/Buttons X/Button X 5 A").SetActive(true);
+                                    GameObject.Find("/Input/Buttons X/Button X 4 A").SetActive(true);
                                     buttonNumber++;
                                     //drapeau.transform.Translate(0, 5, 0);
                                 }
@@ -1275,13 +1271,13 @@ namespace SpanishInquisition
                                 }
                             }
 
-                            if (GameObject.Find("/Input/Buttons Y/Button Y 5").activeSelf == true)
+                            if (GameObject.Find("/Input/Buttons Y/Button Y 4").activeSelf == true)
                             {
                                 if (Input.GetButton("Y_Button"))
                                 {
                                     Debug.Log("Success");
                                     sMngr.PlayGoodButton();
-                                    GameObject.Find("/Input/Buttons Y/Button Y 5 A").SetActive(true);
+                                    GameObject.Find("/Input/Buttons Y/Button Y 4 A").SetActive(true);
                                     buttonNumber++;
                                     //drapeau.transform.Translate(0, 5, 0);
                                 }
