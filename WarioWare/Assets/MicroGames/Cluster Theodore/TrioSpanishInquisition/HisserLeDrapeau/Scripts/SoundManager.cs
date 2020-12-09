@@ -15,11 +15,13 @@ namespace SpanishInquisition
             [SerializeField]
             private AudioSource wrongButton;
             [SerializeField]
+            private AudioSource victorySound;
+            [SerializeField]
+            private AudioSource defeatSound;
+            [SerializeField]
             private AudioSource rFlag1;
             [SerializeField]
-            private AudioSource rFlag2;
-            [SerializeField]
-            private AudioSource rFlag3;
+
 
             // Start is called before the first frame update
             void Start()
@@ -29,6 +31,8 @@ namespace SpanishInquisition
                 goodButton = gameSounds[0];
                 wrongButton = gameSounds[1];
                 rFlag1 = gameSounds[2];
+                victorySound = gameSounds[3];
+                defeatSound = gameSounds[4];
             }
 
             public void PlayGoodButton()
@@ -47,6 +51,18 @@ namespace SpanishInquisition
             {
                 rFlag1.Play();
                 Debug.Log("Drapeau satde 1");
+            }
+
+            public void PlayVictory()
+            {
+                victorySound.Play();
+                Debug.Log("Son Victoire");
+            }
+
+            public void PlayDefeat()
+            {
+                defeatSound.Play();
+                Debug.Log("Son défaite");
             }
         }
     }
