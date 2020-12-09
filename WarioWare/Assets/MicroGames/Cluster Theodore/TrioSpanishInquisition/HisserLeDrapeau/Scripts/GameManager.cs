@@ -52,8 +52,9 @@ namespace SpanishInquisition
 
             public override void TimedUpdate()
             {
-                /*if (Tick == 8 && gameDone == false)
+                if (Tick == 8 && gameDone == false)
                 {
+                    sMngr.PlayDefeat();
                     Debug.Log("You lose !)");
                     GameObject.Find("/Graphs/Defeat/Typo défaite").SetActive(true);
                     GameObject.Find("/Graphs/Defeat/Feedback défaite").SetActive(true);
@@ -62,8 +63,9 @@ namespace SpanishInquisition
 
                 if (Tick == 8 && gameDone == true)
                 {
+                    sMngr.PlayVictory();
                     Manager.Instance.Result(true);
-                }*/
+                }
             }
 
             public override void FixedUpdate() 
