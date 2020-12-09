@@ -12,7 +12,7 @@ namespace SpanishInquisition
         /// Adel Ahmed-Yahia
         /// </summary>
 
-        public class MainMecaAndSound : TimedBehaviour
+        public class GameManager : TimedBehaviour
         {
             private int QTEGen;
             private int numberOfButtons;
@@ -23,6 +23,7 @@ namespace SpanishInquisition
             private bool gameDone;
             private GameObject activeButton;
             private Transform flag;
+            public Animator animator;
 
             private SoundManager sMngr;
 
@@ -51,14 +52,18 @@ namespace SpanishInquisition
 
             public override void TimedUpdate()
             {
-                if (Tick == 8 && gameDone == false)
+                /*if (Tick == 8 && gameDone == false)
                 {
                     Debug.Log("You lose !)");
                     GameObject.Find("/Graphs/Defeat/Typo défaite").SetActive(true);
                     GameObject.Find("/Graphs/Defeat/Feedback défaite").SetActive(true);
                     Manager.Instance.Result(false);
                 }
-                
+
+                if (Tick == 8 && gameDone == true)
+                {
+                    Manager.Instance.Result(true);
+                }*/
             }
 
             public override void FixedUpdate() 
@@ -208,6 +213,9 @@ namespace SpanishInquisition
 
                         case 3:
 
+                            animator.SetBool("SecondButton", false);
+                            animator.SetBool("ThirdButton", true);
+
                             if (flag.position.y < GameObject.Find("/GameManager/Flag End").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -217,6 +225,9 @@ namespace SpanishInquisition
                             break;
 
                         case 2:
+
+                            animator.SetBool("FirstButton", false);
+                            animator.SetBool("SecondButton", true);
 
                             if (flag.position.y < GameObject.Find("/GameManager/Flag Third").transform.position.y)
                             {
@@ -297,6 +308,8 @@ namespace SpanishInquisition
                             break;
 
                         case 1:
+
+                            animator.SetBool("FirstButton", true);
 
                             if (flag.position.y < GameObject.Find("/GameManager/Flag First").transform.position.y)
                             {
@@ -599,6 +612,8 @@ namespace SpanishInquisition
 
                         case 4:
 
+                            animator.SetBool("ThirdButton", false);
+                            animator.SetBool("FirstButton", true);
                             if (flag.position.y < GameObject.Find("/GameManager/Flag End").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -608,6 +623,9 @@ namespace SpanishInquisition
                             break;
 
                         case 3:
+
+                            animator.SetBool("SecondButton", false);
+                            animator.SetBool("ThirdButton", true);
                             if (flag.position.y < GameObject.Find("/GameManager/Flag Fourth").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -688,6 +706,8 @@ namespace SpanishInquisition
 
                         case 2:
 
+                            animator.SetBool("FirstButton", false);
+                            animator.SetBool("SecondButton", true);
                             if (flag.position.y < GameObject.Find("/GameManager/Flag Second").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -768,6 +788,7 @@ namespace SpanishInquisition
 
                         case 1:
 
+                            animator.SetBool("FirstButton", true);
                             if (flag.position.y < GameObject.Find("/GameManager/Flag First").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -1094,6 +1115,9 @@ namespace SpanishInquisition
 
                         case 5:
 
+                            animator.SetBool("FirstButton", false);
+                            animator.SetBool("SecondButton", true);
+
                             if (flag.position.y < GameObject.Find("/GameManager/Flag End").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -1103,6 +1127,10 @@ namespace SpanishInquisition
                             break;
 
                         case 4:
+
+                            animator.SetBool("ThirdButton", false);
+                            animator.SetBool("FirstButton", true);
+
                             if (flag.position.y < GameObject.Find("/GameManager/Flag Fourth").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -1182,6 +1210,10 @@ namespace SpanishInquisition
                             break;
 
                         case 3:
+
+                            animator.SetBool("SecondButton", false);
+                            animator.SetBool("ThirdButton", true);
+
                             if (flag.position.y < GameObject.Find("/GameManager/Flag Third").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -1262,6 +1294,9 @@ namespace SpanishInquisition
 
                         case 2:
 
+                            animator.SetBool("FirstButton", false);
+                            animator.SetBool("SecondButton", true);
+
                             if (flag.position.y < GameObject.Find("/GameManager/Flag Second").transform.position.y)
                             {
                                 flag.Translate(Vector3.up * Time.deltaTime * 10);
@@ -1341,6 +1376,8 @@ namespace SpanishInquisition
                             break;
 
                         case 1:
+
+                            animator.SetBool("FirstButton", true);
 
                             if (flag.position.y < GameObject.Find("/GameManager/Flag First").transform.position.y)
                             {
