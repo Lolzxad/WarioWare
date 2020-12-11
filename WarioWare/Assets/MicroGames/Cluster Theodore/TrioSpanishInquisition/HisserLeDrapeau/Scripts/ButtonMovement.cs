@@ -39,7 +39,6 @@ namespace SpanishInquisition
                 distanceToTarget = Mathf.Abs((target.position - transform.position).magnitude);
                 if (distanceToTarget <= radius)
                 {
-                    Debug.Log("Heho");
                     if (Input.GetButtonDown("A_Button") && type == ButtonsType.A)
                     {
                         manager.score++;
