@@ -21,7 +21,10 @@ namespace SpanishInquisition
             private float radius;
             private float distanceToTarget;
             public float speed;
+            public float flagToSpawner;
+            public GameObject flag;
             public ButtonsType type;
+            public ParticleSystem feedbackParticle;
 
             private NewGameManager manager;
 
@@ -31,6 +34,10 @@ namespace SpanishInquisition
                 manager = GameObject.Find("Manager").GetComponent<NewGameManager>();
                 radius = manager.radius;
                 target = manager.target;
+                speed = manager.speed;
+                flagToSpawner = manager.flagToSpawner;
+                flag = manager.flag;
+                feedbackParticle = manager.feedbackParticle;
                 //spawner = manager.spawner.transform;
             }       
 
@@ -42,26 +49,52 @@ namespace SpanishInquisition
                     if (Input.GetButtonDown("A_Button") && type == ButtonsType.A)
                     {
                         manager.score++;
+
+                        if (flag.transform.position.y < (flag.transform.position.y + flagToSpawner))
+                        {
+                            flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
+                        }
+                       
+                        feedbackParticle.Play();
                         Destroy(gameObject);
-                        //Particle or effect
                     }
 
                     if (Input.GetButtonDown("B_Button") && type == ButtonsType.B)
                     {
                         manager.score++;
-                        //Flag movement
+
+                        if (flag.transform.position.y < (flag.transform.position.y + flagToSpawner))
+                        {
+                            flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
+                        }
+
+                        feedbackParticle.Play();
                         Destroy(gameObject);
                     }
 
                     if (Input.GetButtonDown("X_Button") && type == ButtonsType.X)
                     {
                         manager.score++;
+
+                        if (flag.transform.position.y < (flag.transform.position.y + flagToSpawner))
+                        {
+                            flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
+                        }
+
+                        feedbackParticle.Play();
                         Destroy(gameObject);
                     }
 
                     if (Input.GetButtonDown("Y_Button") && type == ButtonsType.Y)
                     {
                         manager.score++;
+
+                        if (flag.transform.position.y < (flag.transform.position.y + flagToSpawner))
+                        {
+                            flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
+                        }
+
+                        feedbackParticle.Play();
                         Destroy(gameObject);
                     }
 
