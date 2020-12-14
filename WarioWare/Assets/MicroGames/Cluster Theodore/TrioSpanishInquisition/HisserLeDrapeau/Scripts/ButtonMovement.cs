@@ -73,6 +73,7 @@ namespace SpanishInquisition
                             flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
                         }
 
+                        feedbackParticle.Play();
                         soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
@@ -86,6 +87,7 @@ namespace SpanishInquisition
                             flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
                         }
 
+                        feedbackParticle.Play();
                         soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
@@ -99,6 +101,7 @@ namespace SpanishInquisition
                             flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
                         }
 
+                        feedbackParticle.Play();
                         soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
