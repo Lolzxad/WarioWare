@@ -16,11 +16,13 @@ namespace SpanishInquisition
             public bool gameIsWon;
             public Transform target;
             public float radius;
+            public ParticleSystem feedbackParticle;
             [HideInInspector] public int score;
 
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
+                feedbackParticle.GetComponent<ParticleSystem>();
 
                 switch (currentDifficulty)
                 {
@@ -46,6 +48,11 @@ namespace SpanishInquisition
                 if (score >= objectiveNumber)
                 {
                     gameIsWon = true;
+                }
+
+                if (Input.GetKey(KeyCode.A))
+                {
+                    feedbackParticle.Play();
                 }
             }
 
