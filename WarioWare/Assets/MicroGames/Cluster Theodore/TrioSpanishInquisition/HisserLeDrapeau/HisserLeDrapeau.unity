@@ -149,21 +149,41 @@ PrefabInstance:
     - target: {fileID: 8103686662137475442, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8103686662137475444, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8103686662529468755, guid: d39924a2e99da644fa8ca0eb0717bea5,
+    - target: {fileID: 8103686662529468752, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
-      propertyPath: playOnAwake
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103686662529468752, guid: d39924a2e99da644fa8ca0eb0717bea5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103686662529468754, guid: d39924a2e99da644fa8ca0eb0717bea5,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8103686662529468755, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103686662529468755, guid: d39924a2e99da644fa8ca0eb0717bea5,
+        type: 3}
       propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103686662529468755, guid: d39924a2e99da644fa8ca0eb0717bea5,
+        type: 3}
+      propertyPath: ShapeModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8103686662529468756, guid: d39924a2e99da644fa8ca0eb0717bea5,
@@ -179,7 +199,7 @@ PrefabInstance:
     - target: {fileID: 8103686662529468757, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.63
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8103686662529468757, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
@@ -229,7 +249,7 @@ PrefabInstance:
     - target: {fileID: 8103686663664099132, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8103686663664099134, guid: d39924a2e99da644fa8ca0eb0717bea5,
         type: 3}
@@ -351,6 +371,11 @@ PrefabInstance:
       propertyPath: feedbackParticle
       value: 
       objectReference: {fileID: 1633993992}
+    - target: {fileID: 1864437762211327444, guid: 6d378743d19061b4bb508008ff4a745d,
+        type: 3}
+      propertyPath: radius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1864437762211327445, guid: 6d378743d19061b4bb508008ff4a745d,
         type: 3}
       propertyPath: m_LocalPosition.x

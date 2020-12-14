@@ -31,17 +31,17 @@ namespace SpanishInquisition
 
                 switch (currentDifficulty)
                 {
-                    case Manager.Difficulty.EASY:
+                    case Difficulty.EASY:
                         objectiveNumber = 3;
                         FlagMove();
                         break;
 
-                    case Manager.Difficulty.MEDIUM:
+                    case Difficulty.MEDIUM:
                         objectiveNumber = 4;
                         FlagMove();
                         break;
 
-                    case Manager.Difficulty.HARD:
+                    case Difficulty.HARD:
                         objectiveNumber = 5;
                         FlagMove();
                         break;
