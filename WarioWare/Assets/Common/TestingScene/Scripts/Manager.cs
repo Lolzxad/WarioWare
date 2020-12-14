@@ -28,6 +28,7 @@ namespace Testing {
         public TextMeshProUGUI verbeText;
         public Image inputImage;
         public GameObject sceneCam;
+        public bool isLoaded;
         #endregion
 
         #region Methods
@@ -35,12 +36,14 @@ namespace Testing {
         {
             var _scene = SceneManager.LoadSceneAsync(idCard.microGameScene.BuildIndex, LoadSceneMode.Additive);
             _scene.allowSceneActivation = false;
+            Debug.Log(_scene.allowSceneActivation);
             verbeText.text = idCard.verbe;
             inputImage.sprite = idCard.inputs;
             yield return new WaitForSeconds(2f);
             sceneCam.SetActive(false);
             verbePanel.SetActive(false);
             _scene.allowSceneActivation = true;
+            isLoaded = true;
         }
 
         /// <summary>

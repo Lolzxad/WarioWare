@@ -8,6 +8,20 @@ namespace SpanishInquisition
     {
         public class SoundManager : MonoBehaviour
         {
+
+            private static SoundManager _instance;
+            public static SoundManager instance
+            {
+                get
+                {
+                    if (_instance == null)
+                    {
+                        _instance = FindObjectOfType<SoundManager>();
+                    }
+                    return _instance;
+                }
+            }
+
             private AudioSource[] gameSounds;
 
             [SerializeField]
