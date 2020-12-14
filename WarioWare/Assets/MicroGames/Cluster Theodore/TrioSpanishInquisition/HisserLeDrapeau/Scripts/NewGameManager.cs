@@ -28,7 +28,7 @@ namespace SpanishInquisition
             {
                 base.Start(); //Do not erase this line!
                 feedbackParticle.GetComponent<ParticleSystem>();
-                speed = 5 * bpm / 60;
+                speed = bpm / 10;
                 flag = GameObject.Find("/Graphs/Flag");
                 soundManager = GetComponentInChildren<SoundManager>();
 
