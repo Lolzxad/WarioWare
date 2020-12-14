@@ -78,7 +78,7 @@ namespace SpanishInquisition
                 if (score >= objectiveNumber)
                 {
                     gameIsWon = true;
-                    //soundManager.PlayVictory();
+                    soundManager.PlayVictory();
                     GameObject.Find("/Graphs/Victory/Typo victoire").SetActive(true);
                     GameObject.Find("/Graphs/Victory/Feedback victoire").SetActive(true);
                 }
