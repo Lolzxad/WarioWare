@@ -24,6 +24,7 @@ namespace SpanishInquisition
             public ButtonsType type;
 
             private NewGameManager manager;
+            private SoundManager soundMngr;
 
             public override void Start()
             {
@@ -32,6 +33,8 @@ namespace SpanishInquisition
                 radius = manager.radius;
                 target = manager.target;
                 //spawner = manager.spawner.transform;
+                soundMngr = GameObject.Find("/Manager/SoundManager").GetComponent<SoundManager>();
+
             }       
 
             private void Update()
@@ -42,6 +45,7 @@ namespace SpanishInquisition
                     if (Input.GetButtonDown("A_Button") && type == ButtonsType.A)
                     {
                         manager.score++;
+                        soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                         //Particle or effect
                     }
@@ -49,6 +53,7 @@ namespace SpanishInquisition
                     if (Input.GetButtonDown("B_Button") && type == ButtonsType.B)
                     {
                         manager.score++;
+                        soundMngr.PlayGoodButton();
                         //Flag movement
                         Destroy(gameObject);
                     }
@@ -56,12 +61,14 @@ namespace SpanishInquisition
                     if (Input.GetButtonDown("X_Button") && type == ButtonsType.X)
                     {
                         manager.score++;
+                        soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
 
                     if (Input.GetButtonDown("Y_Button") && type == ButtonsType.Y)
                     {
                         manager.score++;
+                        soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
 

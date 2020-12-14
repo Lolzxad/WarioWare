@@ -21,7 +21,16 @@ namespace SpanishInquisition
             [SerializeField]
             private AudioSource rFlag1;
             [SerializeField]
+            private AudioSource buttonApparition;
 
+            [SerializeField]
+            private AudioSource musicSlow;
+            [SerializeField]
+            private AudioSource musicMedium;
+            [SerializeField]
+            private AudioSource musicFast;
+            [SerializeField]
+            private AudioSource musicSuperFast;
 
             // Start is called before the first frame update
             void Start()
@@ -33,6 +42,11 @@ namespace SpanishInquisition
                 rFlag1 = gameSounds[2];
                 victorySound = gameSounds[3];
                 defeatSound = gameSounds[4];
+                buttonApparition = gameSounds[5];
+                musicSlow = gameSounds[6];
+                musicMedium = gameSounds[7];
+                musicFast = gameSounds[8];
+                musicSuperFast = gameSounds[9];
             }
 
             public void PlayGoodButton()
@@ -63,6 +77,32 @@ namespace SpanishInquisition
             {
                 defeatSound.Play();
                 Debug.Log("Son défaite");
+            }
+
+            public void PlayButtonApparition()
+            {
+                buttonApparition.Play();
+                Debug.Log("Son Apparition");
+            }
+
+            public void PlayFlagMusicSlow()
+            {
+                musicSlow.Play();
+            }
+
+            public void PlayFlagMusicMedium()
+            {
+                musicMedium.Play();
+            }
+
+            public void PlayFlagMusicFast()
+            {
+                musicFast.Play();
+            }
+
+            public void PlayFlagMusicSuperFast()
+            {
+                musicSuperFast.Play();
             }
         }
     }
