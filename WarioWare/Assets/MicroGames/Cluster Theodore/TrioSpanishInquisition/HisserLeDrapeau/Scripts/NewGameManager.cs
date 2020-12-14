@@ -32,24 +32,24 @@ namespace SpanishInquisition
                 flag = GameObject.Find("/Graphs/Flag");
                 soundManager = GetComponentInChildren<SoundManager>();
 
-                /*switch (currentTime)
+                switch (bpm)                   
                 {
-                    case Manager.BPM.Slow:
+                    case 60:
                         soundManager.PlayFlagMusicSlow();
                         break;
 
-                    case Manager.BPM.Medium:
+                    case 90:
                         soundManager.PlayFlagMusicMedium();
                         break;
 
-                    case Manager.BPM.Fast:
+                    case 120:
                         soundManager.PlayFlagMusicFast();
                         break;
 
-                    case Manager.BPM.SuperFast:
+                    case 140:
                         soundManager.PlayFlagMusicSuperFast();
                         break;
-                }*/
+                }
                 
                 switch (currentDifficulty)
                 {
