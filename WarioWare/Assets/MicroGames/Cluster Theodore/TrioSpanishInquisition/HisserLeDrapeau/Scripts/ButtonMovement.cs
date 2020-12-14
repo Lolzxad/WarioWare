@@ -27,6 +27,7 @@ namespace SpanishInquisition
             public ParticleSystem feedbackParticle;
 
             private NewGameManager manager;
+            private SoundManager soundMngr;
 
             public override void Start()
             {
@@ -39,6 +40,8 @@ namespace SpanishInquisition
                 flag = manager.flag;
                 feedbackParticle = manager.feedbackParticle;
                 //spawner = manager.spawner.transform;
+                soundMngr = GameObject.Find("/Manager/SoundManager").GetComponent<SoundManager>();
+
             }       
 
             private void Update()
@@ -56,45 +59,28 @@ namespace SpanishInquisition
                         }
                        
                         feedbackParticle.Play();
+                        soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
 
                     if (Input.GetButtonDown("B_Button") && type == ButtonsType.B)
                     {
                         manager.score++;
-
-                        if (flag.transform.position.y < (flag.transform.position.y + flagToSpawner))
-                        {
-                            flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
-                        }
-
-                        feedbackParticle.Play();
+                        soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
 
                     if (Input.GetButtonDown("X_Button") && type == ButtonsType.X)
                     {
                         manager.score++;
-
-                        if (flag.transform.position.y < (flag.transform.position.y + flagToSpawner))
-                        {
-                            flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
-                        }
-
-                        feedbackParticle.Play();
+                        soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
 
                     if (Input.GetButtonDown("Y_Button") && type == ButtonsType.Y)
                     {
                         manager.score++;
-
-                        if (flag.transform.position.y < (flag.transform.position.y + flagToSpawner))
-                        {
-                            flag.transform.position += Vector3.up * flagToSpawner * Time.deltaTime;
-                        }
-
-                        feedbackParticle.Play();
+                        soundMngr.PlayGoodButton();
                         Destroy(gameObject);
                     }
 

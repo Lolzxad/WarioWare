@@ -22,13 +22,35 @@ namespace SpanishInquisition
             public ParticleSystem feedbackParticle;
             [HideInInspector] public int score;
 
+            private SoundManager soundManager;
+
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
                 feedbackParticle.GetComponent<ParticleSystem>();
                 speed = 5 * bpm / 60;
                 flag = GameObject.Find("/Graphs/Flag");
+                soundManager = GetComponentInChildren<SoundManager>();
 
+                /*switch (currentTime)
+                {
+                    case Manager.BPM.Slow:
+                        soundManager.PlayFlagMusicSlow();
+                        break;
+
+                    case Manager.BPM.Medium:
+                        soundManager.PlayFlagMusicMedium();
+                        break;
+
+                    case Manager.BPM.Fast:
+                        soundManager.PlayFlagMusicFast();
+                        break;
+
+                    case Manager.BPM.SuperFast:
+                        soundManager.PlayFlagMusicSuperFast();
+                        break;
+                }*/
+                
                 switch (currentDifficulty)
                 {
                     case Difficulty.EASY:
@@ -56,6 +78,7 @@ namespace SpanishInquisition
                 if (score >= objectiveNumber)
                 {
                     gameIsWon = true;
+                    //soundManager.PlayVictory();
                     GameObject.Find("/Graphs/Victory/Typo victoire").SetActive(true);
                     GameObject.Find("/Graphs/Victory/Feedback victoire").SetActive(true);
                 }
@@ -89,18 +112,22 @@ namespace SpanishInquisition
                 {
                     case 3:
                         GameObject.Instantiate(buttons[3], spawner.transform.position, Quaternion.identity);
+                        soundManager.PlayButtonApparition();
                         break;
 
                     case 2:
                         GameObject.Instantiate(buttons[2], spawner.transform.position, Quaternion.identity);
+                        soundManager.PlayButtonApparition();
                         break;
 
                     case 1:
                         GameObject.Instantiate(buttons[1], spawner.transform.position, Quaternion.identity);
+                        soundManager.PlayButtonApparition();
                         break;
 
                     case 0:
                         GameObject.Instantiate(buttons[0], spawner.transform.position, Quaternion.identity);
+                        soundManager.PlayButtonApparition();
                         break;
 
                     default:
