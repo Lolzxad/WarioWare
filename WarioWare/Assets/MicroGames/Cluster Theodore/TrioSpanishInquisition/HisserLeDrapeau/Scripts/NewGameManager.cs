@@ -99,6 +99,7 @@ namespace SpanishInquisition
 
                 if (Tick == 8 && !gameIsWon)
                 {
+                    soundManager.PlayDefeat();
                     GameObject.Find("/Graphs/Defeat/Typo défaite").SetActive(true);
                     GameObject.Find("/Graphs/Defeat/Feedback défaite").SetActive(true);
                 }
