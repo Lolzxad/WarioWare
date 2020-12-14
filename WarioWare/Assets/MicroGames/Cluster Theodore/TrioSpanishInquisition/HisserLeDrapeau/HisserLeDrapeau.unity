@@ -390,6 +390,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4661277555781155570, guid: 10288e5f254c9244ea8e5149deb12100,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4661277555812698726, guid: 10288e5f254c9244ea8e5149deb12100,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -449,6 +454,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Graphs
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661277556089316093, guid: 10288e5f254c9244ea8e5149deb12100,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661277556235468944, guid: 10288e5f254c9244ea8e5149deb12100,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661277557195202074, guid: 10288e5f254c9244ea8e5149deb12100,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10288e5f254c9244ea8e5149deb12100, type: 3}
