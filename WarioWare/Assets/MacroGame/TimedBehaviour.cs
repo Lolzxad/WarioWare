@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TimedBehaviour : MonoBehaviour
 {
-   [HideInInspector] public float bpm = 60;
-    [HideInInspector] public Manager.Difficulty currentDifficulty = 0;
+    [HideInInspector] public float bpm = 60;
+    [HideInInspector] public Difficulty currentDifficulty = 0;
 
     public double timer;
     public double currentTime;

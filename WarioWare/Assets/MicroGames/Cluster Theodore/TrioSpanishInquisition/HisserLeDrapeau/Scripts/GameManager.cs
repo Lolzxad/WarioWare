@@ -36,15 +36,15 @@ namespace SpanishInquisition
 
                 switch (currentDifficulty)
                 {
-                    case Manager.Difficulty.EASY:
+                    case Difficulty.EASY:
                         easyGame = true;
                         break;
 
-                    case Manager.Difficulty.MEDIUM:
+                    case Difficulty.MEDIUM:
                         medGame = true;
                         break;
 
-                    case Manager.Difficulty.HARD:
+                    case Difficulty.HARD:
                         hardGame = true;
                         break;
                 }

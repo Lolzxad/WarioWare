@@ -12,10 +12,13 @@ namespace SpanishInquisition
         {
             public GameObject[] buttons;
             public GameObject spawner;
+            public GameObject flag;
             public int objectiveNumber;
             public bool gameIsWon;
             public Transform target;
             public float radius;
+            public float speed;
+            public float flagToSpawner;
             public ParticleSystem feedbackParticle;
             [HideInInspector] public int score;
 
@@ -23,19 +26,24 @@ namespace SpanishInquisition
             {
                 base.Start(); //Do not erase this line!
                 feedbackParticle.GetComponent<ParticleSystem>();
+                speed = 5 * bpm / 60;
+                flag = GameObject.Find("/Graphs/Flag");
 
                 switch (currentDifficulty)
                 {
-                    case Manager.Difficulty.EASY:
+                    case Difficulty.EASY:
                         objectiveNumber = 3;
+                        FlagMove();
                         break;
 
-                    case Manager.Difficulty.MEDIUM:
+                    case Difficulty.MEDIUM:
                         objectiveNumber = 4;
+                        FlagMove();
                         break;
 
-                    case Manager.Difficulty.HARD:
+                    case Difficulty.HARD:
                         objectiveNumber = 5;
+                        FlagMove();
                         break;
                 }
             }
@@ -48,11 +56,8 @@ namespace SpanishInquisition
                 if (score >= objectiveNumber)
                 {
                     gameIsWon = true;
-                }
-
-                if (Input.GetKey(KeyCode.A))
-                {
-                    feedbackParticle.Play();
+                    GameObject.Find("/Graphs/Victory/Typo victoire").SetActive(true);
+                    GameObject.Find("/Graphs/Victory/Feedback victoire").SetActive(true);
                 }
             }
 
@@ -67,6 +72,12 @@ namespace SpanishInquisition
                 if (Tick == 8)
                 {
                     Manager.Instance.Result(gameIsWon);
+                }
+
+                if (Tick == 8 && !gameIsWon)
+                {
+                    GameObject.Find("/Graphs/Defeat/Typo défaite").SetActive(true);
+                    GameObject.Find("/Graphs/Defeat/Feedback défaite").SetActive(true);
                 }
             }
 
@@ -94,13 +105,13 @@ namespace SpanishInquisition
 
                     default:
                         Debug.Log("Wrong button index");
-                        break;
+                        break;  
                 }
             }
 
             private void FlagMove()
             {
-
+                flagToSpawner = ((spawner.transform.position - flag.transform.position).magnitude) / objectiveNumber;
             }
         }
     }
