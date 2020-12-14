@@ -70,6 +70,7 @@ namespace SpanishInquisition
                 if (score >= objectiveNumber)
                 {
                     gameIsWon = true;
+                    //soundManager.PlayVictory();
                 }
 
                 if (Input.GetKey(KeyCode.A))
