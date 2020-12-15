@@ -36,7 +36,6 @@ namespace Testing {
         {
             var _scene = SceneManager.LoadSceneAsync(idCard.microGameScene.BuildIndex, LoadSceneMode.Additive);
             _scene.allowSceneActivation = false;
-            Debug.Log(_scene.allowSceneActivation);
             verbeText.text = idCard.verbe;
             inputImage.sprite = idCard.inputs;
             yield return new WaitForSeconds(2f);

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class TimedBehaviour : MonoBehaviour
 {
-    [HideInInspector] public float bpm = 60;
+   [HideInInspector] public float bpm = 60;
     [HideInInspector] public Difficulty currentDifficulty = 0;
 
     public double timer;
@@ -21,7 +21,7 @@ public class TimedBehaviour : MonoBehaviour
 
     public virtual void Start()
     {
-        if (SceneManager.GetActiveScene().name == "TestingScene")
+        if (SceneManager.GetActiveScene().name == "TestingScene" || SceneManager.GetActiveScene().name == "SceneCap" || SceneManager.GetActiveScene().name == "Zone1")
         {
             bpm =(float) Manager.Instance.bpm;
             currentDifficulty = Manager.Instance.currentDifficulty;
@@ -32,13 +32,13 @@ public class TimedBehaviour : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
+        if(Manager.Instance.isLoaded)
         timer = AudioSettings.dspTime - currentTime;
-        if (timer >= 60 / bpm && Manager.Instance.isLoaded)
+        if (timer >= 60 / bpm)
         {
             Tick++;
             currentTime = AudioSettings.dspTime;
             TimedUpdate();
-            Debug.Log(Tick);
         }
     }
   
@@ -50,10 +50,5 @@ public class TimedBehaviour : MonoBehaviour
     {
         
     }
-            // Update is called once per frame
-            private void Update()
-            {
-
-            }
 
 }
