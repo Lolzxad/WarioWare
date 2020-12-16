@@ -23,7 +23,7 @@ namespace SpanishInquisition
             public GameObject flag;
             public ButtonsType type;
 
-            private NewGameManager manager;
+            private OldGameManager manager;
             private SoundManager soundMngr;
 
             public bool InZone ()
@@ -38,7 +38,7 @@ namespace SpanishInquisition
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
-                manager = NewGameManager.instance;
+                manager = OldGameManager.instance;
                 soundMngr = SoundManager.instance;
                 radius = manager.radius;
                 target = manager.target;

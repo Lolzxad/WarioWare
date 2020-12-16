@@ -5,23 +5,23 @@ using UnityEngine;
 namespace SpanishInquisition
 {
 
-    namespace HisserLeDrapeau
+    namespace VegetablePirate
     {
 
         /// <summary>
         /// Adel Ahmed-Yahia
         /// </summary>
         
-        public class NewGameManager : TimedBehaviour
+        public class GameManager : TimedBehaviour
         {
-            private static NewGameManager _instance;
-            public static NewGameManager instance
+            private static GameManager _instance;
+            public static GameManager instance
             {
                 get
                 {
                     if (_instance == null)
                     {
-                        _instance = FindObjectOfType<NewGameManager>();
+                        _instance = FindObjectOfType<GameManager>();
                     }
                     return _instance;
                 }

@@ -12,7 +12,7 @@ namespace SpanishInquisition
         /// Adel Ahmed-Yahia
         /// </summary>
 
-        public class GameManager : TimedBehaviour
+        public class OldGameManager : TimedBehaviour
         {
             private int QTEGen;
             private int numberOfButtons;
