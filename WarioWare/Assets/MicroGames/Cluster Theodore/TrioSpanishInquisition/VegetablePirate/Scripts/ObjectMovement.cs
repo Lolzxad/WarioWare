@@ -4,26 +4,25 @@ using UnityEngine;
 
 namespace SpanishInquisition
 {
-    namespace HisserLeDrapeau
+    namespace VegetablePirate
     {
 
-        public enum ButtonsType
+        public enum ObjectsType
         {
-            A, 
-            B,
-            X,
-            Y
+            fruit,
+            bomb
         }
-        public class ButtonMovement : TimedBehaviour
+
+        public class ObjectMovement : TimedBehaviour
         {
             private Transform target;
             private float radius;
             private float distanceToTarget;
             public float speed;
-            public GameObject flag;
-            public ButtonsType type;
+            public ObjectsType type;
 
-            private NewGameManager manager;
+
+            private GameManager manager;
             private SoundManager soundMngr;
 
             public bool InZone ()
@@ -38,7 +37,7 @@ namespace SpanishInquisition
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
-                manager = NewGameManager.instance;
+                manager = GameManager.instance;
                 soundMngr = SoundManager.instance;
                 radius = manager.radius;
                 target = manager.target;
@@ -54,7 +53,7 @@ namespace SpanishInquisition
 
             private void OnBecameInvisible()
             {
-                manager.activeButtons.Remove(this);
+                //manager.activeButtons.Remove(this);
                 Destroy(gameObject);
             }
         }

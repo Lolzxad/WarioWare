@@ -27,11 +27,9 @@ namespace SpanishInquisition
                 }
             }
 
-            public GameObject[] buttons;
-            public List<ButtonMovement> activeButtons = new List<ButtonMovement>();
+            public GameObject[] objects;
+            public List<ObjectMovement> activeObjects = new List<ObjectMovement>();
             public GameObject spawner;
-            public GameObject flag;
-            public GameObject flagToEnd;
             public GameObject victoryText;
             public GameObject defeatText;
             public GameObject victoryFeedback;
@@ -42,8 +40,8 @@ namespace SpanishInquisition
             public Transform target;
             public float radius;
             public float speed;
-            public float flagStep;
-            public Vector3 baseFlagPosition;
+            public float cooldown;
+            public Vector3 baseSpawnPosition;
             public Vector3 targetFlagPosition;
             public ParticleSystem feedbackParticle;
             [HideInInspector] public int score;
@@ -57,8 +55,7 @@ namespace SpanishInquisition
                 speed = bpm / 5;
                 score = 0;
                 soundManager = GetComponentInChildren<SoundManager>();
-                baseFlagPosition = flag.transform.position;
-                targetFlagPosition = baseFlagPosition;
+                baseSpawnPosition = spawner.transform.position;
 
                 switch (bpm)                   
                 {
@@ -83,17 +80,17 @@ namespace SpanishInquisition
                 {
                     case Difficulty.EASY:
                         objectiveNumber = 3;
-                        FlagMove();
+
                         break;
 
                     case Difficulty.MEDIUM:
                         objectiveNumber = 4;
-                        FlagMove();
+
                         break;
 
                     case Difficulty.HARD:
                         objectiveNumber = 5;
-                        FlagMove();
+
                         break;
                 }
             }
@@ -108,7 +105,7 @@ namespace SpanishInquisition
 
             public void Update()
             {
-                flag.transform.position = Vector3.Lerp(flag.transform.position, targetFlagPosition, Time.deltaTime * 5f);
+                //flag.transform.position = Vector3.Lerp(flag.transform.position, targetFlagPosition, Time.deltaTime * 5f);
 
                 InputFailSuccessConditions();
 
@@ -120,7 +117,7 @@ namespace SpanishInquisition
                     victoryFeedback.SetActive(true);
                 }
 
-                switch (score)
+                /*switch (score)
                 {
                     case 5:
                         animator.SetBool("FirstButton", false);
@@ -148,7 +145,7 @@ namespace SpanishInquisition
 
                     default:
                         break;
-                }
+                }*/
             }
 
             //TimedUpdate is called once every tick.
@@ -175,57 +172,37 @@ namespace SpanishInquisition
             private void Spawner()
             {
 
-                int buttonNumber = Random.Range(0, 4);
+                int objectNumber = Random.Range(0, 4);
 
                 //create new clone
-                GameObject newButtonInstance = GameObject.Instantiate(buttons[buttonNumber], spawner.transform.position, Quaternion.identity);
+                GameObject newButtonInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
 
                 //activate the gameobject (because the templates are inactive in the scene, so it makes the clone inactive when instantiated)
                 newButtonInstance.SetActive(true);
 
                 //add the script to a list of all the button script existing
-                activeButtons.Add(newButtonInstance.GetComponent<ButtonMovement>());
+                activeObjects.Add(newButtonInstance.GetComponent<ObjectMovement>());
 
-                
-                soundManager.PlayButtonApparition();
-            }
-
-            private void FlagMove()
-            {
-                flagStep = ((flagToEnd.transform.position - flag.transform.position).magnitude) / objectiveNumber;
+                soundManager.PlayObjectThrown();
             }
 
             private void InputFailSuccessConditions()
             {
-                // Iterate over each buttons
-                foreach (ButtonMovement btnMovement in activeButtons)
+                // Iterate over each objects
+                foreach (ObjectMovement objMovement in activeObjects)
                 {
-                    if (btnMovement.InZone())
+                    if (objMovement.InZone())
                     {
-                        //Debug.Log("button input= " + btnMovement.type.ToString());
-                        //Debug.Log("input= " + System.Enum.GetName(typeof(ButtonsType), btnMovement.type));
 
-
-
-                        //
-                        // si le bon bouton est appuyé : réussite
-                        /*if ((Input.GetButtonDown("A_Button") && btnMovement.type == ButtonsType.A)
-                        || (Input.GetButtonDown("B_Button") && btnMovement.type == ButtonsType.B)
-                        || (Input.GetButtonDown("X_Button") && btnMovement.type == ButtonsType.X)
-                        || (Input.GetButtonDown("Y_Button") && btnMovement.type == ButtonsType.Y))
-                        {*/
-                        string buttonString = btnMovement.type.ToString();
-                        if (Input.GetButtonDown(buttonString + "_Button")) 
+                        if (Input.GetButtonDown("X_Button") && objMovement.type == ObjectsType.fruit)
                         {
-                            ButtonSuccess(btnMovement);
+                            CutFruit(objMovement);
                         } else
                         {
-                            if ((Input.GetButtonDown("A_Button") && btnMovement.type != ButtonsType.A)
-                                || (Input.GetButtonDown("B_Button") && btnMovement.type != ButtonsType.B)
-                                || (Input.GetButtonDown("X_Button") && btnMovement.type != ButtonsType.X)
-                                || (Input.GetButtonDown("Y_Button") && btnMovement.type != ButtonsType.Y))
+                            if ((Input.GetButtonDown("X_Button") && objMovement.type == ObjectsType.bomb)
+)
                             {
-                                ButtonFail();
+                                CutBomb();
                             }
                         }
 
@@ -234,42 +211,50 @@ namespace SpanishInquisition
                 }
 
 
-                //No buttons are found in the zone
+                //No objects are found in the zone
                 // si un bouton est appuyé : échec
-                if (Input.GetButtonDown("A_Button") || Input.GetButtonDown("B_Button")|| Input.GetButtonDown("X_Button")|| Input.GetButtonDown("Y_Button")) 
+                if (Input.GetButtonDown("X_Button"))
                 {
-                    ButtonFail();
+                    CutFail();
                 }
             }
 
 
-            public void ButtonSuccess(ButtonMovement btnMovement)
+            public void CutFruit(ObjectMovement objMovement)
             {
 
                 if (score < objectiveNumber)
                 {
                     score++;
 
-                    targetFlagPosition = baseFlagPosition + ((Vector3.up * flagStep) * score);
 
                     feedbackParticle.Play();
                     soundManager.PlayGoodButton();
 
-                    activeButtons.Remove(btnMovement);
-                    Destroy(btnMovement.gameObject);
+                    activeObjects.Remove(objMovement);
+                    Destroy(objMovement.gameObject);
                 }
             }
 
-            public void ButtonFail()
+            public void CutBomb()
             {
                 if (score >= 0 && !gameIsWon)
                 {
                     score--;
 
-                    targetFlagPosition = baseFlagPosition + ((Vector3.up * flagStep) * score);
                     soundManager.PlayWrongButton();
                 }
             }
+
+            public void CutFail()
+            {
+                if (score >= 0 && !gameIsWon)
+                {
+                    score--;
+
+                    soundManager.PlayWrongButton();
+                }
+            }          
         }
     }
 }

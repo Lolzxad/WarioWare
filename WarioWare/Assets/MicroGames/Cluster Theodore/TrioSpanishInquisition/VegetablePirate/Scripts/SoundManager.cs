@@ -33,9 +33,9 @@ namespace SpanishInquisition
             [SerializeField]
             private AudioSource defeatSound;
             [SerializeField]
-            private AudioSource rFlag1;
+            private AudioSource katanaCut;
             [SerializeField]
-            private AudioSource buttonApparition;
+            private AudioSource objectThrown;
 
             [SerializeField]
             private AudioSource musicSlow;
@@ -53,10 +53,10 @@ namespace SpanishInquisition
 
                 goodButton = gameSounds[0];
                 wrongButton = gameSounds[1];
-                rFlag1 = gameSounds[2];
+                katanaCut = gameSounds[2];
                 victorySound = gameSounds[3];
                 defeatSound = gameSounds[4];
-                buttonApparition = gameSounds[5];
+                objectThrown = gameSounds[5];
                 musicSlow = gameSounds[6];
                 musicMedium = gameSounds[7];
                 musicFast = gameSounds[8];
@@ -72,13 +72,13 @@ namespace SpanishInquisition
             public void PlayWrongButton()
             {
                 wrongButton.Play();
-                Debug.Log("WronButton play");
+                Debug.Log("WrongButton play");
             }
 
-            public void PlayFlagFirst()
+            public void PlayKatana()
             {
-                rFlag1.Play();
-                Debug.Log("Drapeau satde 1");
+                katanaCut.Play();
+                Debug.Log("Son Katana");
             }
 
             public void PlayVictory()
@@ -93,10 +93,10 @@ namespace SpanishInquisition
                 Debug.Log("Son défaite");
             }
 
-            public void PlayButtonApparition()
+            public void PlayObjectThrown()
             {
-                buttonApparition.Play();
-                Debug.Log("Son Apparition");
+                objectThrown.Play();
+                Debug.Log("Son objet lancé");
             }
 
             public void PlayFlagMusicSlow()
