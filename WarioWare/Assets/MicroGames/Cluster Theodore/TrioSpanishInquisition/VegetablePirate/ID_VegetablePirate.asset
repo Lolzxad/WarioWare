@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2cda822bfa80074f881e6fe0192b4c9, type: 3}
-  m_Name: VegetablePirate
+  m_Name: ID_VegetablePirate
   m_EditorClassIdentifier: 
   cluster: 0
-  trio: Brigantin
-  indexEnum: 0
+  trio: SpanishInquisition
+  indexEnum: 1
   verbe: 
   microGameScene:
-    sceneAsset: {fileID: 0}
+    sceneAsset: {fileID: 102900000, guid: 090f472027b26f14d988c0016316069a, type: 3}
     required: 0
     buildIndex: -1
   inputs: {fileID: 0}

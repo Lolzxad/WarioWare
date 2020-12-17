@@ -48,7 +48,7 @@ namespace SpanishInquisition
 
             private void Update()
             {
-                transform.position += Vector3.down * speed * Time.deltaTime;
+                //fruit or bomb movement
             }
 
             private void OnBecameInvisible()
