@@ -37,8 +37,8 @@ namespace SpanishInquisition
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
-                manager = GameManager.instance;
-                soundMngr = SoundManager.instance;
+                //manager = GameManager.instance;
+                //soundMngr = SoundManager.instance;
                 radius = manager.radius;
                 target = manager.target;
                 speed = manager.speed;
