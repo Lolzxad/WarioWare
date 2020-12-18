@@ -37,8 +37,8 @@ namespace SpanishInquisition
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
-                manager = GameManager.instance;
-                soundMngr = SoundManager.instance;
+                //manager = GameManager.instance;
+                //soundMngr = SoundManager.instance;
                 radius = manager.radius;
                 target = manager.target;
                 speed = manager.speed;
@@ -48,7 +48,7 @@ namespace SpanishInquisition
 
             private void Update()
             {
-                transform.position += Vector3.down * speed * Time.deltaTime;
+                //fruit or bomb movement
             }
 
             private void OnBecameInvisible()

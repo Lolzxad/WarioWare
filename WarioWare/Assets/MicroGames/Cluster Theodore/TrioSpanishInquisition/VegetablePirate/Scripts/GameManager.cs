@@ -11,10 +11,10 @@ namespace SpanishInquisition
         /// <summary>
         /// Adel Ahmed-Yahia
         /// </summary>
-        
+
         public class GameManager : TimedBehaviour
         {
-            private static GameManager _instance;
+            /*private static GameManager _instance;
             public static GameManager instance
             {
                 get
@@ -25,7 +25,7 @@ namespace SpanishInquisition
                     }
                     return _instance;
                 }
-            }
+            }*/
 
             public GameObject[] objects;
             public List<ObjectMovement> activeObjects = new List<ObjectMovement>();
@@ -36,13 +36,15 @@ namespace SpanishInquisition
             public GameObject defeatFeedback;
             public Animator animator;
             public int objectiveNumber;
+            public int numberOfBombs;
+            public float tickTimer;
             public bool gameIsWon;
             public Transform target;
             public float radius;
             public float speed;
             public float cooldown;
             public Vector3 baseSpawnPosition;
-            public Vector3 targetFlagPosition;
+            //public Vector3 targetFlagPosition;
             public ParticleSystem feedbackParticle;
             [HideInInspector] public int score;
 
@@ -57,7 +59,7 @@ namespace SpanishInquisition
                 soundManager = GetComponentInChildren<SoundManager>();
                 baseSpawnPosition = spawner.transform.position;
 
-                switch (bpm)                   
+                switch (bpm)
                 {
                     case 60:
                         soundManager.PlayFlagMusicSlow();
@@ -75,7 +77,7 @@ namespace SpanishInquisition
                         soundManager.PlayFlagMusicSuperFast();
                         break;
                 }
-                
+
                 switch (currentDifficulty)
                 {
                     case Difficulty.EASY:
@@ -93,14 +95,6 @@ namespace SpanishInquisition
 
                         break;
                 }
-            }
-
-            //FixedUpdate is called on a fixed time.
-            public override void FixedUpdate()
-            {
-                base.FixedUpdate(); //Do not erase this line!
-
-                
             }
 
             public void Update()
@@ -151,6 +145,9 @@ namespace SpanishInquisition
             //TimedUpdate is called once every tick.
             public override void TimedUpdate()
             {
+                tickTimer = Time.deltaTime;
+                Debug.Log(tickTimer);
+
                 if (Tick < 8 && !gameIsWon)
                 {
                     Spawner();
@@ -158,7 +155,7 @@ namespace SpanishInquisition
 
                 if (Tick == 8)
                 {
-                    Manager.Instance.Result (gameIsWon);
+                    //Manager.Instance.Result (gameIsWon);
                 }
 
                 if (Tick == 8 && !gameIsWon)
@@ -171,19 +168,58 @@ namespace SpanishInquisition
 
             private void Spawner()
             {
+                if (objectiveNumber == 3 || (objectiveNumber == 4 && numberOfBombs >= 2) || (objectiveNumber == 5 && numberOfBombs >= 3))
+                {
+                    int objectNumber = 0;
 
-                int objectNumber = Random.Range(0, 4);
+                    //create new clone
+                    GameObject newObjectInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
 
-                //create new clone
-                GameObject newButtonInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
+                    //activate the gameobject (because the templates are inactive in the scene, so it makes the clone inactive when instantiated)
+                    newObjectInstance.SetActive(true);
 
-                //activate the gameobject (because the templates are inactive in the scene, so it makes the clone inactive when instantiated)
-                newButtonInstance.SetActive(true);
+                    //add the script to a list of all the button script existing
+                    activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
 
-                //add the script to a list of all the button script existing
-                activeObjects.Add(newButtonInstance.GetComponent<ObjectMovement>());
+                    soundManager.PlayObjectThrown();
+                }
 
-                soundManager.PlayObjectThrown();
+                if (objectiveNumber == 4 && numberOfBombs < 2)
+                {
+                    int objectNumber = Random.Range(0, 2);
+
+                    if (objectNumber == 1)
+                    {
+                        numberOfBombs++;
+                    }
+
+                    GameObject newObjectInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
+
+                    newObjectInstance.SetActive(true);
+
+                    activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
+
+                    soundManager.PlayObjectThrown();
+                }
+
+                if (objectiveNumber == 5 && numberOfBombs < 3)
+                {
+                    int objectNumber = Random.Range(0, 2);
+
+                    if (objectNumber == 1)
+                    {
+                        numberOfBombs++;
+                    }
+
+                    GameObject newObjectInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
+
+                    newObjectInstance.SetActive(true);
+
+                    activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
+
+                    soundManager.PlayObjectThrown();
+                }
+
             }
 
             private void InputFailSuccessConditions()
@@ -202,7 +238,7 @@ namespace SpanishInquisition
                             if ((Input.GetButtonDown("X_Button") && objMovement.type == ObjectsType.bomb)
 )
                             {
-                                CutBomb();
+                                CutBomb(objMovement);
                             }
                         }
 
@@ -217,6 +253,8 @@ namespace SpanishInquisition
                 {
                     CutFail();
                 }
+
+                //Cooldown 0.5 tick
             }
 
 
@@ -227,8 +265,8 @@ namespace SpanishInquisition
                 {
                     score++;
 
-
                     feedbackParticle.Play();
+                    soundManager.PlayKatana();
                     soundManager.PlayGoodButton();
 
                     activeObjects.Remove(objMovement);
@@ -236,13 +274,17 @@ namespace SpanishInquisition
                 }
             }
 
-            public void CutBomb()
+            public void CutBomb(ObjectMovement objMovement)
             {
                 if (score >= 0 && !gameIsWon)
                 {
                     score--;
-
+                    feedbackParticle.Play();
+                    soundManager.PlayKatana();
                     soundManager.PlayWrongButton();
+
+                    activeObjects.Remove(objMovement);
+                    Destroy(objMovement.gameObject);
                 }
             }
 
@@ -250,9 +292,10 @@ namespace SpanishInquisition
             {
                 if (score >= 0 && !gameIsWon)
                 {
-                    score--;
 
-                    soundManager.PlayWrongButton();
+                    feedbackParticle.Play();
+                    soundManager.PlayKatana();
+                    soundManager.PlayKatana();
                 }
             }          
         }
