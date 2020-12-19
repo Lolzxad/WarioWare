@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Testing;
 using UnityEngine;
+using Testing;
 
 namespace SpanishInquisition
 {
@@ -14,7 +15,7 @@ namespace SpanishInquisition
 
         public class GameManager : TimedBehaviour
         {
-            /*private static GameManager _instance;
+            private static GameManager _instance;
             public static GameManager instance
             {
                 get
@@ -25,7 +26,7 @@ namespace SpanishInquisition
                     }
                     return _instance;
                 }
-            }*/
+            }
 
             public GameObject[] objects;
             public List<ObjectMovement> activeObjects = new List<ObjectMovement>();
@@ -44,7 +45,6 @@ namespace SpanishInquisition
             public float speed;
             public float cooldown;
             public Vector3 baseSpawnPosition;
-            //public Vector3 targetFlagPosition;
             public ParticleSystem feedbackParticle;
             [HideInInspector] public int score;
 
@@ -53,6 +53,9 @@ namespace SpanishInquisition
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
+
+                currentDifficulty = Difficulty.EASY;
+
                 feedbackParticle.GetComponent<ParticleSystem>();
                 speed = bpm / 5;
                 score = 0;
@@ -143,8 +146,11 @@ namespace SpanishInquisition
             }
 
             //TimedUpdate is called once every tick.
+
             public override void TimedUpdate()
             {
+                base.TimedUpdate();
+
                 tickTimer = Time.deltaTime;
                 Debug.Log(tickTimer);
 

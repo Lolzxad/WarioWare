@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Testing;
 using UnityEngine;
+using Testing;
 
 namespace SpanishInquisition
 {
@@ -53,6 +54,8 @@ namespace SpanishInquisition
             public override void Start()
             {
                 base.Start(); //Do not erase this line!
+
+                //currentDifficulty = Difficulty.EASY;
                 feedbackParticle.GetComponent<ParticleSystem>();
                 speed = bpm / 5;
                 score = 0;
@@ -154,6 +157,8 @@ namespace SpanishInquisition
             //TimedUpdate is called once every tick.
             public override void TimedUpdate()
             {
+                base.TimedUpdate();
+
                 if (Tick < 8 && !gameIsWon)
                 {
                     Spawner();
