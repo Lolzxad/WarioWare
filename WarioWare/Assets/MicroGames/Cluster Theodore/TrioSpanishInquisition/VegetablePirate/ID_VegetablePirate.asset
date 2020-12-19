@@ -15,11 +15,11 @@ MonoBehaviour:
   cluster: 0
   trio: SpanishInquisition
   indexEnum: 1
-  verbe: 
+  verbe: Tranchez !
   microGameScene:
     sceneAsset: {fileID: 102900000, guid: 090f472027b26f14d988c0016316069a, type: 3}
     required: 0
-    buildIndex: -1
+    buildIndex: 6
   inputs: {fileID: 0}
   currentDifficulty: 0
   idWeight: 0

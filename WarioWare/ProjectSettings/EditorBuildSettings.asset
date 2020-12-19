@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MicroGames/Cluster Theodore/TrioSpanishInquisition/HisserLeDrapeau/HisserLeDrapeau.unity
     guid: d1d641469f4b9814fba98db1b859e31e
+  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/MicroGames/Cluster Theodore/TrioSpanishInquisition/VegetablePirate/VegetablePirate.unity
+    guid: 090f472027b26f14d988c0016316069a
   m_configObjects: {}

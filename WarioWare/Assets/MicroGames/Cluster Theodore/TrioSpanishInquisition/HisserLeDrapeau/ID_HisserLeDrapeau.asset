@@ -15,7 +15,7 @@ MonoBehaviour:
   cluster: 0
   trio: SpanishInquisition
   indexEnum: 1
-  verbe: 
+  verbe: Hissez !
   microGameScene:
     sceneAsset: {fileID: 102900000, guid: d1d641469f4b9814fba98db1b859e31e, type: 3}
     required: 0
