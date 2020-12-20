@@ -16,9 +16,11 @@ namespace SpanishInquisition
         public class ObjectMovement : TimedBehaviour
         {
             private Transform target;
+            private Transform trueTarget;
             private float radius;
             private float distanceToTarget;
             public float speed;
+            public float scaleSpeed = 10f;
             public ObjectsType type;
 
 
@@ -36,11 +38,12 @@ namespace SpanishInquisition
 
             public override void Start()
             {
-                base.Start(); //Do not erase this line!
+                base.Start(); //Do not erase this line!               
                 manager = GameManager.instance;
                 soundMngr = SoundManager.instance;
                 radius = manager.radius;
                 target = manager.target;
+                trueTarget = manager.trueTarget;
                 speed = manager.speed;
 
                 //spawner = manager.spawner.transform;
@@ -49,9 +52,13 @@ namespace SpanishInquisition
             private void Update()
             {
                 //fruit or bomb movement
-                transform.position += Vector3.left * speed * Time.deltaTime;
-                transform.localScale += new Vector3(1, 0, 1) * Time.deltaTime;
-                transform.Rotate (Vector3.up * speed * Time.deltaTime);
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, trueTarget.position, speed * Time.deltaTime); 
+                if (transform.localScale.x < 1)
+                {
+                    transform.localScale += new Vector3(1, 1, 1) * scaleSpeed * Time.deltaTime;
+                }
+                
+                transform.Rotate (Vector3.forward * (750 * Time.deltaTime));
             }
 
             private void OnBecameInvisible()

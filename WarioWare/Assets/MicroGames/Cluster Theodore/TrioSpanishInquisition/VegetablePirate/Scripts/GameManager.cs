@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Testing;
 using UnityEngine;
-using Testing;
 
 namespace SpanishInquisition
 {
@@ -31,8 +30,8 @@ namespace SpanishInquisition
             public GameObject[] objects;
             public List<ObjectMovement> activeObjects = new List<ObjectMovement>();
             public GameObject spawner;
-            public GameObject victoryText;
-            public GameObject defeatText;
+            public GameObject neutralCursor;
+            public GameObject activeCursor;
             public GameObject victoryFeedback;
             public GameObject defeatFeedback;
             public Animator animator;
@@ -40,7 +39,9 @@ namespace SpanishInquisition
             public int numberOfBombs;
             public float tickTimer;
             public bool gameIsWon;
+            public bool test;
             public Transform target;
+            public Transform trueTarget;
             public float radius;
             public float speed;
             public float cooldown;
@@ -54,7 +55,7 @@ namespace SpanishInquisition
             {
                 base.Start(); //Do not erase this line!
 
-                currentDifficulty = Difficulty.EASY;
+                currentDifficulty = Difficulty.MEDIUM;
 
                 feedbackParticle.GetComponent<ParticleSystem>();
                 speed = bpm / 5;
@@ -102,7 +103,12 @@ namespace SpanishInquisition
 
             public void Update()
             {
-                //flag.transform.position = Vector3.Lerp(flag.transform.position, targetFlagPosition, Time.deltaTime * 5f);
+                if (!test)
+                {
+                    Spawner();
+                    test = true;
+                }
+                
 
                 InputFailSuccessConditions();
 
@@ -110,7 +116,6 @@ namespace SpanishInquisition
                 {
                     gameIsWon = true;
                     soundManager.PlayVictory();
-                    victoryText.SetActive(true);
                     victoryFeedback.SetActive(true);
                 }
 
@@ -167,7 +172,6 @@ namespace SpanishInquisition
                 if (Tick == 8 && !gameIsWon)
                 {
                     soundManager.PlayDefeat();
-                    defeatText.SetActive(true);
                     defeatFeedback.SetActive(true);
                 }
             }
@@ -235,15 +239,19 @@ namespace SpanishInquisition
                 {
                     if (objMovement.InZone())
                     {
+                        neutralCursor.SetActive(false);
+                        activeCursor.SetActive(true);
 
                         if (Input.GetButtonDown("X_Button") && objMovement.type == ObjectsType.fruit)
                         {
+                            animator.SetBool("isCutting", true);
                             CutFruit(objMovement);
                         } else
                         {
                             if ((Input.GetButtonDown("X_Button") && objMovement.type == ObjectsType.bomb)
 )
                             {
+                                animator.SetBool("isCutting", true);
                                 CutBomb(objMovement);
                             }
                         }
@@ -257,9 +265,13 @@ namespace SpanishInquisition
                 // si un bouton est appuyé : échec
                 if (Input.GetButtonDown("X_Button"))
                 {
+                    animator.SetBool("isCutting", true);
                     CutFail();
                 }
 
+                activeCursor.SetActive(false);
+                neutralCursor.SetActive(true);
+                animator.SetBool("isCutting", false);
                 //Cooldown 0.5 tick
             }
 

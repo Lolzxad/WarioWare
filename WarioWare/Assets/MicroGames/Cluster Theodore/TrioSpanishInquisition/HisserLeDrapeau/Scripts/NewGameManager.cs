@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Testing;
 using UnityEngine;
-using Testing;
 
 namespace SpanishInquisition
 {
