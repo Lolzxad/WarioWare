@@ -53,9 +53,9 @@ namespace SpanishInquisition
 
                 goodButton = gameSounds[0];
                 wrongButton = gameSounds[1];
-                katanaCut = gameSounds[2];
-                victorySound = gameSounds[3];
-                defeatSound = gameSounds[4];
+                victorySound = gameSounds[2];
+                defeatSound = gameSounds[3];
+                katanaCut = gameSounds[4];            
                 objectThrown = gameSounds[5];
                 musicSlow = gameSounds[6];
                 musicMedium = gameSounds[7];

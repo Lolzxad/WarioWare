@@ -34,6 +34,7 @@ namespace SpanishInquisition
             public GameObject activeCursor;
             public GameObject victoryFeedback;
             public GameObject defeatFeedback;
+            public GameObject explosionSprite;
             public Animator animator;
             public int objectiveNumber;
             public int numberOfBombs;
@@ -46,7 +47,9 @@ namespace SpanishInquisition
             public float speed;
             public float cooldown;
             public Vector3 baseSpawnPosition;
-            public ParticleSystem feedbackParticle;
+            public ParticleSystem cutParticle;
+            public ParticleSystem fruitParticle;
+            public ParticleSystem explosionParticle;
             [HideInInspector] public int score;
 
             private SoundManager soundManager;
@@ -57,7 +60,9 @@ namespace SpanishInquisition
 
                 currentDifficulty = Difficulty.MEDIUM;
 
-                feedbackParticle.GetComponent<ParticleSystem>();
+                cutParticle.GetComponent<ParticleSystem>();
+                fruitParticle.GetComponent<ParticleSystem>();
+                explosionParticle.GetComponent<ParticleSystem>();
                 speed = bpm / 5;
                 score = 0;
                 soundManager = GetComponentInChildren<SoundManager>();
@@ -242,13 +247,13 @@ namespace SpanishInquisition
                         neutralCursor.SetActive(false);
                         activeCursor.SetActive(true);
 
-                        if (Input.GetButtonDown("X_Button") && objMovement.type == ObjectsType.fruit)
+                        if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X) && objMovement.type == ObjectsType.fruit)
                         {
                             animator.SetBool("isCutting", true);
                             CutFruit(objMovement);
                         } else
                         {
-                            if ((Input.GetButtonDown("X_Button") && objMovement.type == ObjectsType.bomb)
+                            if ((Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X) && objMovement.type == ObjectsType.bomb)
 )
                             {
                                 animator.SetBool("isCutting", true);
@@ -263,7 +268,7 @@ namespace SpanishInquisition
 
                 //No objects are found in the zone
                 // si un bouton est appuyé : échec
-                if (Input.GetButtonDown("X_Button"))
+                if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X))
                 {
                     animator.SetBool("isCutting", true);
                     CutFail();
@@ -272,6 +277,7 @@ namespace SpanishInquisition
                 activeCursor.SetActive(false);
                 neutralCursor.SetActive(true);
                 animator.SetBool("isCutting", false);
+                explosionSprite.SetActive(false);
                 //Cooldown 0.5 tick
             }
 
@@ -283,7 +289,8 @@ namespace SpanishInquisition
                 {
                     score++;
 
-                    feedbackParticle.Play();
+                    cutParticle.Play();
+                    fruitParticle.Play();
                     soundManager.PlayKatana();
                     soundManager.PlayGoodButton();
 
@@ -297,7 +304,9 @@ namespace SpanishInquisition
                 if (score >= 0 && !gameIsWon)
                 {
                     score--;
-                    feedbackParticle.Play();
+                    cutParticle.Play();
+                    explosionParticle.Play();
+                    explosionSprite.SetActive(true);
                     soundManager.PlayKatana();
                     soundManager.PlayWrongButton();
 
@@ -310,9 +319,7 @@ namespace SpanishInquisition
             {
                 if (score >= 0 && !gameIsWon)
                 {
-
-                    feedbackParticle.Play();
-                    soundManager.PlayKatana();
+                    cutParticle.Play();
                     soundManager.PlayKatana();
                 }
             }          
