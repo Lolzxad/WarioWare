@@ -34,15 +34,18 @@ namespace Testing {
         #region Methods
         public IEnumerator Start()
         {
-            yield return new WaitForSeconds(0.5f);
-            var _scene = SceneManager.LoadSceneAsync(idCard.microGameScene.BuildIndex, LoadSceneMode.Additive);
-            _scene.allowSceneActivation = false;
-            verbeText.text = idCard.verbe;
-            inputImage.sprite = idCard.inputs;
-            yield return new WaitForSeconds(2f);
-            sceneCam.SetActive(false);
-            verbePanel.SetActive(false);
-            _scene.allowSceneActivation = true;
+            yield return new WaitForSeconds(0.5f);           
+            if (idCard != null)
+            {
+                var _scene = SceneManager.LoadSceneAsync(idCard.microGameScene.BuildIndex, LoadSceneMode.Additive);
+                _scene.allowSceneActivation = false;
+                verbeText.text = idCard.verbe;
+                inputImage.sprite = idCard.inputs;
+                yield return new WaitForSeconds(2f);
+                sceneCam.SetActive(false);
+                verbePanel.SetActive(false);
+                _scene.allowSceneActivation = true;                
+            }
             isLoaded = true;
         }
 

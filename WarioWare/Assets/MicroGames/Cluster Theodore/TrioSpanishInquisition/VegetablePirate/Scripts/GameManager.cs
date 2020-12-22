@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using Testing;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Testing;
 
 namespace SpanishInquisition
 {
@@ -28,6 +29,7 @@ namespace SpanishInquisition
             }
 
             public GameObject[] objects;
+            public ObjectsType[] objectsType;
             public List<ObjectMovement> activeObjects = new List<ObjectMovement>();
             public GameObject spawner;
             public GameObject neutralCursor;
@@ -36,11 +38,14 @@ namespace SpanishInquisition
             public GameObject defeatFeedback;
             public GameObject explosionSprite;
             public Animator animator;
-            public int objectiveNumber;
-            public int numberOfBombs;
+            public int objectsNumber;
+            public int objectSpawned;
+            public int numberOfBombsNeeded;
             public float tickTimer;
+            public float cooldownTime;
             public bool gameIsWon;
-            public bool test;
+            public bool gameIsFinished;
+            public bool canCut;
             public Transform target;
             public Transform trueTarget;
             public float radius;
@@ -50,7 +55,6 @@ namespace SpanishInquisition
             public ParticleSystem cutParticle;
             public ParticleSystem fruitParticle;
             public ParticleSystem explosionParticle;
-            [HideInInspector] public int score;
 
             private SoundManager soundManager;
 
@@ -60,11 +64,12 @@ namespace SpanishInquisition
 
                 currentDifficulty = Difficulty.MEDIUM;
 
+                canCut = true;
+                cooldownTime = (0.5f * 60) / bpm;
                 cutParticle.GetComponent<ParticleSystem>();
                 fruitParticle.GetComponent<ParticleSystem>();
                 explosionParticle.GetComponent<ParticleSystem>();
                 speed = bpm / 5;
-                score = 0;
                 soundManager = GetComponentInChildren<SoundManager>();
                 baseSpawnPosition = spawner.transform.position;
 
@@ -89,70 +94,41 @@ namespace SpanishInquisition
 
                 switch (currentDifficulty)
                 {
-                    case Difficulty.EASY:
-                        objectiveNumber = 3;
+                    case Difficulty.EASY:                        
+                        objectsNumber = 3;
+                        numberOfBombsNeeded = 0;
 
                         break;
 
                     case Difficulty.MEDIUM:
-                        objectiveNumber = 4;
+                        objectsNumber = 4;
+                        numberOfBombsNeeded = 2;
 
                         break;
 
                     case Difficulty.HARD:
-                        objectiveNumber = 5;
+                        objectsNumber = 5;
+                        numberOfBombsNeeded = 3;
 
                         break;
                 }
+
+                objectsType = new ObjectsType[objectsNumber];
+                RandomizeObjects();
             }
 
             public void Update()
-            {
-                if (!test)
+            {              
+                if (!gameIsFinished && canCut)
                 {
-                    Spawner();
-                    test = true;
+                    InputFailSuccessConditions();
                 }
                 
-
-                InputFailSuccessConditions();
-
-                if (score >= objectiveNumber && !gameIsWon)
+                if (HasWon())
                 {
-                    gameIsWon = true;
-                    soundManager.PlayVictory();
-                    victoryFeedback.SetActive(true);
+                    gameIsFinished = true;
+                    FinishGame();
                 }
-
-                /*switch (score)
-                {
-                    case 5:
-                        animator.SetBool("FirstButton", false);
-                        animator.SetBool("SecondButton", true);
-                        break;
-
-                    case 4:
-                        animator.SetBool("ThirdButton", false);
-                        animator.SetBool("FirstButton", true);
-                        break;
-
-                    case 3:
-                        animator.SetBool("SecondButton", false);
-                        animator.SetBool("ThirdButton", true);
-                        break;
-
-                    case 2:
-                        animator.SetBool("FirstButton", false);
-                        animator.SetBool("SecondButton", true);
-                        break;
-
-                    case 1:
-                        animator.SetBool("FirstButton", true);
-                        break;
-
-                    default:
-                        break;
-                }*/
             }
 
             //TimedUpdate is called once every tick.
@@ -161,10 +137,8 @@ namespace SpanishInquisition
             {
                 base.TimedUpdate();
 
-                tickTimer = Time.deltaTime;
-                Debug.Log(tickTimer);
 
-                if (Tick < 8 && !gameIsWon)
+                if ((Tick < 8 && !gameIsWon) || !gameIsFinished)
                 {
                     Spawner();
                 }
@@ -174,21 +148,21 @@ namespace SpanishInquisition
                     //Manager.Instance.Result (gameIsWon);
                 }
 
-                if (Tick == 8 && !gameIsWon)
+                if ((Tick == 8 && !gameIsWon) || gameIsFinished)
                 {
-                    soundManager.PlayDefeat();
-                    defeatFeedback.SetActive(true);
+                    
                 }
             }
-
+             
             private void Spawner()
             {
-                if (objectiveNumber == 3 || (objectiveNumber == 4 && numberOfBombs >= 2) || (objectiveNumber == 5 && numberOfBombs >= 3))
+                if (objectSpawned < objectsNumber)
                 {
-                    int objectNumber = 0;
+                    ObjectsType currentType = objectsType[objectSpawned];
 
                     //create new clone
-                    GameObject newObjectInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
+                    GameObject newObjectInstance = GameObject.Instantiate(objects[(int)currentType], spawner.transform.position, Quaternion.identity);
+                    objectSpawned++;
 
                     //activate the gameobject (because the templates are inactive in the scene, so it makes the clone inactive when instantiated)
                     newObjectInstance.SetActive(true);
@@ -197,49 +171,14 @@ namespace SpanishInquisition
                     activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
 
                     soundManager.PlayObjectThrown();
-                }
-
-                if (objectiveNumber == 4 && numberOfBombs < 2)
-                {
-                    int objectNumber = Random.Range(0, 2);
-
-                    if (objectNumber == 1)
-                    {
-                        numberOfBombs++;
-                    }
-
-                    GameObject newObjectInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
-
-                    newObjectInstance.SetActive(true);
-
-                    activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
-
-                    soundManager.PlayObjectThrown();
-                }
-
-                if (objectiveNumber == 5 && numberOfBombs < 3)
-                {
-                    int objectNumber = Random.Range(0, 2);
-
-                    if (objectNumber == 1)
-                    {
-                        numberOfBombs++;
-                    }
-
-                    GameObject newObjectInstance = GameObject.Instantiate(objects[objectNumber], spawner.transform.position, Quaternion.identity);
-
-                    newObjectInstance.SetActive(true);
-
-                    activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
-
-                    soundManager.PlayObjectThrown();
-                }
-
+                }          
             }
 
             private void InputFailSuccessConditions()
             {
-                // Iterate over each objects
+
+                bool objectCut = false;
+
                 foreach (ObjectMovement objMovement in activeObjects)
                 {
                     if (objMovement.InZone())
@@ -247,82 +186,127 @@ namespace SpanishInquisition
                         neutralCursor.SetActive(false);
                         activeCursor.SetActive(true);
 
-                        if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X) && objMovement.type == ObjectsType.fruit)
+                        if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X))
                         {
-                            animator.SetBool("isCutting", true);
-                            CutFruit(objMovement);
-                        } else
-                        {
-                            if ((Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X) && objMovement.type == ObjectsType.bomb)
-)
+                            animator.SetTrigger("Cut");
+
+                            if (objMovement.type == ObjectsType.fruit)
                             {
-                                animator.SetBool("isCutting", true);
+                                CutFruit(objMovement);
+                            }
+                            else if (objMovement.type == ObjectsType.bomb)
+                            {
                                 CutBomb(objMovement);
                             }
-                        }
-
-                        return;
+                            objectCut = true;
+                        }                    
                     }
                 }
 
-
-                //No objects are found in the zone
-                // si un bouton est appuyé : échec
                 if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X))
                 {
-                    animator.SetBool("isCutting", true);
-                    CutFail();
-                }
+                    animator.SetTrigger("Cut");
 
-                activeCursor.SetActive(false);
-                neutralCursor.SetActive(true);
-                animator.SetBool("isCutting", false);
-                explosionSprite.SetActive(false);
-                //Cooldown 0.5 tick
+                    if (!objectCut)
+                    {
+                        CutFail();
+                    }
+
+                    activeCursor.SetActive(false);
+                    neutralCursor.SetActive(true);
+                    //Cooldown 0.5 tick
+                    StartCoroutine(StartCooldown());
+                }                                             
             }
-
 
             public void CutFruit(ObjectMovement objMovement)
             {
+                cutParticle.Play();
+                fruitParticle.Play();
+                soundManager.PlayKatana();
+                soundManager.PlayGoodButton();
 
-                if (score < objectiveNumber)
-                {
-                    score++;
-
-                    cutParticle.Play();
-                    fruitParticle.Play();
-                    soundManager.PlayKatana();
-                    soundManager.PlayGoodButton();
-
-                    activeObjects.Remove(objMovement);
-                    Destroy(objMovement.gameObject);
-                }
+                objMovement.gameObject.SetActive(false);
+                //activeObjects.Remove(objMovement);
+                //Destroy(objMovement.gameObject);
             }
 
             public void CutBomb(ObjectMovement objMovement)
             {
-                if (score >= 0 && !gameIsWon)
-                {
-                    score--;
-                    cutParticle.Play();
-                    explosionParticle.Play();
-                    explosionSprite.SetActive(true);
-                    soundManager.PlayKatana();
-                    soundManager.PlayWrongButton();
+                gameIsFinished = true;
+                gameIsWon = false;
+                FinishGame();
+                cutParticle.Play();
+                explosionParticle.Play();
+                explosionSprite.SetActive(true);
+                soundManager.PlayKatana();
+                soundManager.PlayWrongButton();
 
-                    activeObjects.Remove(objMovement);
-                    Destroy(objMovement.gameObject);
-                }
+                objMovement.gameObject.SetActive(false);
+                //activeObjects.Remove(objMovement);
+                //Destroy(objMovement.gameObject);    
             }
 
             public void CutFail()
             {
-                if (score >= 0 && !gameIsWon)
+                cutParticle.Play();
+                soundManager.PlayKatana();
+            }
+
+            public void RandomizeObjects()
+            {
+                int numberOfBombs = 0;
+                while (numberOfBombs < numberOfBombsNeeded)
                 {
-                    cutParticle.Play();
-                    soundManager.PlayKatana();
+                    int randomPosition;
+
+                    do
+                    {
+                        randomPosition = Random.Range(0, objectsNumber);
+                    }
+                    while (objectsType[randomPosition] == ObjectsType.bomb);
+
+                    objectsType[randomPosition] = ObjectsType.bomb;
+                    numberOfBombs++;
                 }
-            }          
-        }
+            }
+
+            public void FinishGame()
+            {
+                if (gameIsWon)
+                {
+                    //Win feedback
+                    soundManager.PlayVictory();
+                    victoryFeedback.SetActive(true);
+                }
+                else
+                {
+                    //Loss feedback
+                    soundManager.PlayDefeat();
+                    defeatFeedback.SetActive(true);
+                }
+            }
+
+            public bool HasWon()
+            {
+                bool allObjectsPassed = true;
+
+                foreach (ObjectMovement objMovement in activeObjects)
+                {
+                    if (!objMovement.hasBeenInZone)
+                    {
+                        allObjectsPassed = false;
+                    }
+                }
+                return allObjectsPassed && objectSpawned >= objectsNumber;
+            }
+
+            private IEnumerator StartCooldown()
+            {
+                canCut = false;
+                yield return new WaitForSeconds(cooldownTime);
+                canCut = true;
+            }
+        }      
     }
 }

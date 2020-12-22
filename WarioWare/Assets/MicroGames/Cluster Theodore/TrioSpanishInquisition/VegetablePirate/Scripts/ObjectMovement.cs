@@ -15,23 +15,29 @@ namespace SpanishInquisition
 
         public class ObjectMovement : TimedBehaviour
         {
-            private Transform target;
-            private Transform trueTarget;
+            private Transform katanaPosition;
+            private Transform objectMovementTarget;
             private float radius;
             private float distanceToTarget;
+            public bool hasBeenInZone;
             public float speed;
             public float scaleSpeed = 10f;
             public ObjectsType type;
-
 
             private GameManager manager;
             private SoundManager soundMngr;
 
             public bool InZone ()
             {
-                distanceToTarget = Mathf.Abs((target.position - transform.position).magnitude);
+                
+                distanceToTarget = Vector2.Distance(katanaPosition.position, transform.position);
+
+                //distanceToTarget = Mathf.Abs((target.position - transform.position).magnitude);
                 if (distanceToTarget <= radius)
+                {
+                    hasBeenInZone = true;
                     return true;
+                }                   
                 else
                     return false;                        
             }
@@ -42,29 +48,33 @@ namespace SpanishInquisition
                 manager = GameManager.instance;
                 soundMngr = SoundManager.instance;
                 radius = manager.radius;
-                target = manager.target;
-                trueTarget = manager.trueTarget;
+                katanaPosition = manager.target;
+                objectMovementTarget = manager.trueTarget;
                 speed = manager.speed;
-
-                //spawner = manager.spawner.transform;
             }       
 
             private void Update()
             {
                 //fruit or bomb movement
-                transform.localPosition = Vector3.MoveTowards(transform.localPosition, trueTarget.position, speed * Time.deltaTime); 
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, objectMovementTarget.position, speed * Time.deltaTime); 
                 if (transform.localScale.x < 1)
                 {
                     transform.localScale += new Vector3(1, 1, 1) * scaleSpeed * Time.deltaTime;
                 }
                 
-                transform.Rotate (Vector3.forward * (750 * Time.deltaTime));
+                transform.Rotate (Vector3.forward * (500 * Time.deltaTime));
+
+                PassedZone();
             }
 
-            private void OnBecameInvisible()
+            private void PassedZone()
             {
-                manager.activeObjects.Remove(this);
-                Destroy(gameObject);
+                if (hasBeenInZone && !InZone() && type == ObjectsType.fruit)
+                {
+                    manager.gameIsFinished = true;
+                    manager.gameIsWon = false;
+                    manager.FinishGame();
+                }
             }
         }
     }
