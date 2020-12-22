@@ -20,6 +20,7 @@ namespace SpanishInquisition
             private float radius;
             private float distanceToTarget;
             public bool hasBeenInZone;
+            public bool isDestroyed;
             public float speed;
             public float scaleSpeed = 10f;
             public ObjectsType type;
@@ -33,7 +34,7 @@ namespace SpanishInquisition
                 distanceToTarget = Vector2.Distance(katanaPosition.position, transform.position);
 
                 //distanceToTarget = Mathf.Abs((target.position - transform.position).magnitude);
-                if (distanceToTarget <= radius)
+                if (distanceToTarget <= radius && !isDestroyed)
                 {
                     hasBeenInZone = true;
                     return true;
@@ -69,11 +70,11 @@ namespace SpanishInquisition
 
             private void PassedZone()
             {
-                if (hasBeenInZone && !InZone() && type == ObjectsType.fruit)
+                if (hasBeenInZone && !InZone() && type == ObjectsType.fruit && !manager.gameIsFinished)
                 {
                     manager.gameIsFinished = true;
                     manager.gameIsWon = false;
-                    manager.FinishGame();
+                    manager.EndOfGameFeedback();
                 }
             }
         }

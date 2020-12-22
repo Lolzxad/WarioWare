@@ -29,6 +29,7 @@ namespace SpanishInquisition
             }
 
             public GameObject[] objects;
+            public GameObject[] scoreDisplays;
             public ObjectsType[] objectsType;
             public List<ObjectMovement> activeObjects = new List<ObjectMovement>();
             public GameObject spawner;
@@ -37,15 +38,18 @@ namespace SpanishInquisition
             public GameObject victoryFeedback;
             public GameObject defeatFeedback;
             public GameObject explosionSprite;
-            public Animator animator;
+            public Animator animatorPlayer;
+            public Animator animatorThrower;
             public int objectsNumber;
             public int objectSpawned;
             public int numberOfBombsNeeded;
+            public int fruitsRemaining;
             public float tickTimer;
             public float cooldownTime;
             public bool gameIsWon;
             public bool gameIsFinished;
             public bool canCut;
+            public bool endFeedbackPlayed;
             public Transform target;
             public Transform trueTarget;
             public float radius;
@@ -62,8 +66,9 @@ namespace SpanishInquisition
             {
                 base.Start(); //Do not erase this line!
 
-                currentDifficulty = Difficulty.MEDIUM;
-
+                animatorThrower.SetFloat("Speed", bpm / 60);
+                Debug.Log(bpm / 60);
+                trueTarget.position = target.position + (target.position - spawner.transform.position) * 2;
                 canCut = true;
                 cooldownTime = (0.5f * 60) / bpm;
                 cutParticle.GetComponent<ParticleSystem>();
@@ -113,21 +118,29 @@ namespace SpanishInquisition
                         break;
                 }
 
+                fruitsRemaining = objectsNumber - numberOfBombsNeeded;
+                DisplayScore();
                 objectsType = new ObjectsType[objectsNumber];
                 RandomizeObjects();
             }
 
             public void Update()
-            {              
+            {                
+
                 if (!gameIsFinished && canCut)
                 {
                     InputFailSuccessConditions();
                 }
                 
-                if (HasWon())
+                if (HasWon() && !gameIsFinished)
                 {
                     gameIsFinished = true;
-                    FinishGame();
+                    gameIsWon = true;
+                    if (!endFeedbackPlayed)
+                    {
+                        EndOfGameFeedback();
+                        endFeedbackPlayed = true;
+                    }                   
                 }
             }
 
@@ -160,18 +173,28 @@ namespace SpanishInquisition
                 {
                     ObjectsType currentType = objectsType[objectSpawned];
 
-                    //create new clone
-                    GameObject newObjectInstance = GameObject.Instantiate(objects[(int)currentType], spawner.transform.position, Quaternion.identity);
-                    objectSpawned++;
+                    animatorThrower.SetTrigger(currentType == ObjectsType.fruit ? "Watermelon" : "Bomb");
 
-                    //activate the gameobject (because the templates are inactive in the scene, so it makes the clone inactive when instantiated)
-                    newObjectInstance.SetActive(true);
+                    StartCoroutine(CreateObject((int)currentType));
 
-                    //add the script to a list of all the button script existing
-                    activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
-
-                    soundManager.PlayObjectThrown();
                 }          
+            }
+
+            private IEnumerator CreateObject(int type)
+            {
+                yield return new WaitForSeconds(0.35f * (60 / bpm));
+
+                //create new clone
+                GameObject newObjectInstance = GameObject.Instantiate(objects[type], spawner.transform.position, Quaternion.identity);
+                objectSpawned++;
+
+                //activate the gameobject (because the templates are inactive in the scene, so it makes the clone inactive when instantiated)
+                newObjectInstance.SetActive(true);
+
+                //add the script to a list of all the button script existing
+                activeObjects.Add(newObjectInstance.GetComponent<ObjectMovement>());
+
+                soundManager.PlayObjectThrown();
             }
 
             private void InputFailSuccessConditions()
@@ -188,7 +211,7 @@ namespace SpanishInquisition
 
                         if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X))
                         {
-                            animator.SetTrigger("Cut");
+                            animatorPlayer.SetTrigger("Cut");
 
                             if (objMovement.type == ObjectsType.fruit)
                             {
@@ -205,7 +228,7 @@ namespace SpanishInquisition
 
                 if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X))
                 {
-                    animator.SetTrigger("Cut");
+                    animatorPlayer.SetTrigger("Cut");
 
                     if (!objectCut)
                     {
@@ -225,6 +248,9 @@ namespace SpanishInquisition
                 fruitParticle.Play();
                 soundManager.PlayKatana();
                 soundManager.PlayGoodButton();
+                objMovement.isDestroyed = true;
+                fruitsRemaining--;
+                DisplayScore();
 
                 objMovement.gameObject.SetActive(false);
                 //activeObjects.Remove(objMovement);
@@ -235,7 +261,8 @@ namespace SpanishInquisition
             {
                 gameIsFinished = true;
                 gameIsWon = false;
-                FinishGame();
+                objMovement.isDestroyed = true;
+                EndOfGameFeedback();
                 cutParticle.Play();
                 explosionParticle.Play();
                 explosionSprite.SetActive(true);
@@ -271,7 +298,7 @@ namespace SpanishInquisition
                 }
             }
 
-            public void FinishGame()
+            public void EndOfGameFeedback()
             {
                 if (gameIsWon)
                 {
@@ -290,6 +317,7 @@ namespace SpanishInquisition
             public bool HasWon()
             {
                 bool allObjectsPassed = true;
+                bool allObjectsOutOfZone = true;
 
                 foreach (ObjectMovement objMovement in activeObjects)
                 {
@@ -298,7 +326,26 @@ namespace SpanishInquisition
                         allObjectsPassed = false;
                     }
                 }
-                return allObjectsPassed && objectSpawned >= objectsNumber;
+                foreach (ObjectMovement objMovement in activeObjects)
+                {
+                    if (objMovement.InZone())
+                    {
+                        allObjectsOutOfZone = false;
+                    }
+                }
+                Debug.Log(allObjectsOutOfZone);
+                return allObjectsPassed && allObjectsOutOfZone && objectSpawned >= objectsNumber && fruitsRemaining == 0;
+            }
+
+            public void DisplayScore()
+            {
+                // From int
+                foreach (GameObject display in scoreDisplays)
+                {
+                    display.SetActive(false);
+                }
+
+                scoreDisplays[fruitsRemaining].SetActive(true);
             }
 
             private IEnumerator StartCooldown()
