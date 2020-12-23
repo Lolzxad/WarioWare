@@ -52384,6 +52384,7 @@ GameObject:
   - component: {fileID: 1478329841318289321}
   - component: {fileID: 890178499900490354}
   - component: {fileID: 7848287781876286059}
+  - component: {fileID: 2892955029358592295}
   m_Layer: 0
   m_Name: explosionParticle
   m_TagString: Untagged
@@ -52400,7 +52401,7 @@ Transform:
   m_GameObject: {fileID: 2203928974705239824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8208, y: 1.8208, z: 1.8208}
   m_Children: []
   m_Father: {fileID: 6153546488793625431}
   m_RootOrder: 1
@@ -57127,6 +57128,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &2892955029358592295
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203928974705239824}
+  m_Enabled: 1
+  m_SortingLayerID: -1951159473
+  m_SortingLayer: 1
+  m_SortingOrder: 2
 --- !u!1 &5517018354727245611
 GameObject:
   m_ObjectHideFlags: 0
@@ -57138,6 +57150,7 @@ GameObject:
   - component: {fileID: 7850037029765845526}
   - component: {fileID: 6242777611879783862}
   - component: {fileID: 2704792028572260590}
+  - component: {fileID: 8279709058153331468}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -57154,7 +57167,7 @@ Transform:
   m_GameObject: {fileID: 5517018354727245611}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.1, y: -25.49, z: -0.31}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7257, y: 1.7257, z: 1.7257}
   m_Children: []
   m_Father: {fileID: 6153546488793625431}
   m_RootOrder: 2
@@ -61939,6 +61952,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &8279709058153331468
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5517018354727245611}
+  m_Enabled: 1
+  m_SortingLayerID: -1951159473
+  m_SortingLayer: 1
+  m_SortingOrder: 1
 --- !u!1 &6069484587799848689
 GameObject:
   m_ObjectHideFlags: 0
