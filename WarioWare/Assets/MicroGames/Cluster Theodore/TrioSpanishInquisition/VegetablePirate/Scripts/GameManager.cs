@@ -158,7 +158,7 @@ namespace SpanishInquisition
 
                 if (Tick == 8)
                 {
-                    //Manager.Instance.Result (gameIsWon);
+                    Manager.Instance.Result (gameIsWon);
                 }
 
                 if ((Tick == 8 && !gameIsWon) || gameIsFinished)

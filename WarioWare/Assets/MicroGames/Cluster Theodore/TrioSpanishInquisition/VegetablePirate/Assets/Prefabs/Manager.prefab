@@ -1262,7 +1262,7 @@ MonoBehaviour:
   endFeedbackPlayed: 0
   target: {fileID: 3410203967624074166}
   trueTarget: {fileID: 108051996297412283}
-  radius: 3
+  radius: 6
   speed: 0
   cooldown: 0
   baseSpawnPosition: {x: 0, y: 0, z: 0}
