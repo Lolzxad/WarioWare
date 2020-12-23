@@ -28,6 +28,9 @@ namespace SpanishInquisition
             private GameManager manager;
             private SoundManager soundMngr;
 
+            [SerializeField]
+            private AudioSource bombNoise;
+
             public bool InZone ()
             {
                 

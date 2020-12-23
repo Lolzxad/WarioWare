@@ -46,6 +46,9 @@ namespace SpanishInquisition
             [SerializeField]
             private AudioSource musicSuperFast;
 
+            [SerializeField]
+            private AudioSource bombNoise;
+
             // Start is called before the first frame update
             void Start()
             {
@@ -61,6 +64,7 @@ namespace SpanishInquisition
                 musicMedium = gameSounds[7];
                 musicFast = gameSounds[8];
                 musicSuperFast = gameSounds[9];
+                bombNoise = gameSounds[10];
             }
 
             public void PlayGoodButton()
@@ -117,6 +121,12 @@ namespace SpanishInquisition
             public void PlayFlagMusicSuperFast()
             {
                 musicSuperFast.Play();
+            }
+
+            public void PlayBombNoise()
+            {
+                bombNoise.Play();
+                Debug.Log("Son bombe");
             }
         }
     }
