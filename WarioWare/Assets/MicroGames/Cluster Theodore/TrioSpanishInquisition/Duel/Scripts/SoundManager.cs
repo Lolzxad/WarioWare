@@ -27,13 +27,13 @@ namespace SpanishInquisition
             [SerializeField]
             private AudioSource parry;
             [SerializeField]
-            private AudioSource fail;
-            [SerializeField]
             private AudioSource victorySound;
             [SerializeField]
             private AudioSource defeatSound;
             [SerializeField]
             private AudioSource enemyAttack;
+            [SerializeField]
+            private AudioSource prepareAttack;
 
             [SerializeField]
             private AudioSource musicSlow;
@@ -51,10 +51,10 @@ namespace SpanishInquisition
                 gameSounds = GetComponents<AudioSource>();
 
                 parry = gameSounds[0];
-                fail = gameSounds[1];
-                victorySound = gameSounds[2];
-                defeatSound = gameSounds[3];
-                enemyAttack = gameSounds[4];            
+                victorySound = gameSounds[1];
+                defeatSound = gameSounds[2];
+                enemyAttack = gameSounds[3];
+                prepareAttack = gameSounds[4];
                 musicSlow = gameSounds[5];
                 musicMedium = gameSounds[6];
                 musicFast = gameSounds[7];
@@ -65,12 +65,6 @@ namespace SpanishInquisition
             {
                 parry.Play();
                 Debug.Log("parry play.");
-            }
-
-            public void Playfail()
-            {
-                fail.Play();
-                Debug.Log("fail play");
             }
 
             public void PlayKatana()
