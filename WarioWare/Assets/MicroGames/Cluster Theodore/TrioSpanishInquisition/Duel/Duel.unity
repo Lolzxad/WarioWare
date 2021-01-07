@@ -146,6 +146,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 771235781586167854, guid: 3e69b0908bb284842a868db99477805f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3283792973467545832, guid: 3e69b0908bb284842a868db99477805f,
         type: 3}
       propertyPath: parryButton1
@@ -161,6 +166,11 @@ PrefabInstance:
       propertyPath: parryButton3
       value: 
       objectReference: {fileID: 1300658445}
+    - target: {fileID: 3283792973467545832, guid: 3e69b0908bb284842a868db99477805f,
+        type: 3}
+      propertyPath: numberOfParries
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3283792973467545833, guid: 3e69b0908bb284842a868db99477805f,
         type: 3}
       propertyPath: m_Name
@@ -230,6 +240,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3955326842839914568, guid: c0370e45ceb10ef4484055547bec9063,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4002885830079796859, guid: c0370e45ceb10ef4484055547bec9063,
         type: 3}
       propertyPath: m_Name

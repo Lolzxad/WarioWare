@@ -35,9 +35,11 @@ namespace SpanishInquisition
             public GameObject victoryFeedback;
             public GameObject defeatFeedback;
 
-            public int numberOfParries;
-            public int parriesNeeded;
+            private int numberOfParries;
+            public int parriesNeeded = 2;
             public int currentParryButton;
+            public int neutralTime;
+            public int tickBeforeNextParry;
             public float tickTimer;
             public float cooldownTime;
             public bool gameIsWon;
@@ -54,7 +56,6 @@ namespace SpanishInquisition
                 base.Start(); //Do not erase this line!
 
                 speed = bpm / 5;
-                cooldownTime = (0.5f * 60) / bpm;
                 soundManager = GetComponentInChildren<SoundManager>();
 
 
@@ -81,26 +82,31 @@ namespace SpanishInquisition
                 {
                     case Difficulty.EASY:
 
-                        numberOfParries = 2;
+                        neutralTime = 2;
+                        parriesNeeded = 2;
                         break;
 
                     case Difficulty.MEDIUM:
 
-                        numberOfParries = 3;
+                        neutralTime = 1;
+                        parriesNeeded = 3;
                         break;
 
                     case Difficulty.HARD:
 
-                        numberOfParries = 4;
+                        neutralTime = 0;
+                        parriesNeeded = 6;
                         break;
                 }
-                
+                tickBeforeNextParry = neutralTime;
                 //DisplayScore();               
             }
 
             public void Update()
-            {                
-                
+            {
+
+                UpdateParry();
+
                 if (numberOfParries >= parriesNeeded && !gameIsFinished)
                 {
                     gameIsFinished = true;
@@ -119,10 +125,26 @@ namespace SpanishInquisition
             {
                 base.TimedUpdate();
 
+                Debug.Log(Tick);
 
-                if ((Tick < 8 && !gameIsWon) || !gameIsFinished)
+                if ((Tick < 8 && !gameIsWon) && !gameIsFinished)
                 {
-                    ParryRandomizer();
+                    if (currentParryButton != 0)
+                    {
+                        Fail();
+                        currentParryButton = 0;
+                    }
+                    else
+                    {
+                        if (tickBeforeNextParry > 0)
+                        {
+                            tickBeforeNextParry--;
+                        }
+                        else
+                        {
+                            ParryRandomizer();
+                        }
+                    }
                 }
 
                 if (Tick == 8)
@@ -130,10 +152,78 @@ namespace SpanishInquisition
                     Manager.Instance.Result (gameIsWon);
                 }
 
-                if ((Tick == 8 && !gameIsWon) || gameIsFinished)
+                /*if ((Tick == 8 && !gameIsWon) || gameIsFinished)
                 {
                     
+                }*/
+            }
+
+            private void UpdateParry()
+            {
+                switch (currentParryButton)
+                {
+                    case 1:
+                        if (Input.GetButtonDown("X_Button"))
+                        {
+                            Parry();
+                        }
+
+                        if (Input.GetButtonDown("Y_Button") || Input.GetButtonDown("B_Button"))
+                        {
+                            Fail();
+                        }
+                        break;
+
+                    case 2:
+                        if (Input.GetButtonDown("Y_Button"))
+                        {
+                            Parry();
+                        }
+
+                        if (Input.GetButtonDown("X_Button") || Input.GetButtonDown("B_Button"))
+                        {
+                            Fail();
+
+                        }
+                        break;
+
+                    case 3:
+                        if (Input.GetButtonDown("B_Button"))
+                        {
+                            Parry();
+                        }
+
+                        if (Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
+                        {
+                            Fail();
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
+
+                if(currentParryButton >= 1 && currentParryButton <= 3 && Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button") || Input.GetButtonDown("B_Button"))
+                {
+                    parryButton1.SetActive(false);
+                    parryButton2.SetActive(false);
+                    parryButton3.SetActive(false);
+                    currentParryButton = 0;
+                    tickBeforeNextParry = neutralTime;
+                }
+            }
+
+            private void Parry()
+            {
+                Debug.Log("Parry !");
+                numberOfParries++;
+            }
+
+            private void Fail()
+            {
+                Debug.Log("Fail !");
+                gameIsFinished = true;
+                EndOfGameFeedback();
             }
 
             private void ParryRandomizer()
@@ -143,72 +233,37 @@ namespace SpanishInquisition
                 if (currentParryButton == 1)
                 {
                     parryButton1.SetActive(true);
-
-                    if (Input.GetButtonDown("X_Button"))
-                    {
-                        Debug.Log("Parry !");
-                        numberOfParries++;
-                        parryButton1.SetActive(false);
-                    }
-
-                    if (Input.GetButtonDown("Y_Button") || Input.GetButtonDown("B_Button"))
-                    {
-                        Debug.Log("Fail !");
-                        gameIsFinished = true;
-                    }
                 }
 
                 if (currentParryButton == 2)
                 {
                     parryButton2.SetActive(true);
-
-                    if (Input.GetButtonDown("Y_Button"))
-                    {
-                        Debug.Log("Parry !");
-                        numberOfParries++;
-                        parryButton2.SetActive(false);
-                    }
-
-                    if (Input.GetButtonDown("X_Button") || Input.GetButtonDown("B_Button"))
-                    {
-                        Debug.Log("Fail !");
-                        gameIsFinished = true;
-                    }
                 }
 
                 if (currentParryButton == 3)
                 {
                     parryButton3.SetActive(true);
-
-                    if (Input.GetButtonDown("B_Button"))
-                    {
-                        Debug.Log("Parry !");
-                        numberOfParries++;
-                        parryButton3.SetActive(false);
-                    }
-
-                    if (Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
-                    {
-                        Debug.Log("Fail !");
-                        gameIsFinished = true;
-                    }
                 }
             }
 
 
             public void EndOfGameFeedback()
             {
+                parryButton1.SetActive(false);
+                parryButton2.SetActive(false);
+                parryButton3.SetActive(false);
+
                 if (gameIsWon)
                 {
                     //Win feedback
                     soundManager.PlayVictory();
-                    victoryFeedback.SetActive(true);
+                    //victoryFeedback.SetActive(true);
                 }
                 else
                 {
                     //Loss feedback
                     soundManager.PlayDefeat();
-                    defeatFeedback.SetActive(true);
+                    //defeatFeedback.SetActive(true);
                 }
             }
 
