@@ -61,13 +61,13 @@ namespace SpanishInquisition
                 musicSuperFast = gameSounds[8];
             }
 
-            public void Playparry()
+            public void PlayParry()
             {
                 parry.Play();
                 Debug.Log("parry play.");
             }
 
-            public void PlayKatana()
+            public void PlayAttack()
             {
                 //katanaCut.Play();
                 Debug.Log("Son Katana");
@@ -85,28 +85,28 @@ namespace SpanishInquisition
                 Debug.Log("Son défaite");
             }
 
-            public void PlayObjectThrown()
+            public void PlayPrepareAttack()
             {
                 //objectThrown.Play();
                 Debug.Log("Son objet lancé");
             }
 
-            public void PlayFlagMusicSlow()
+            public void PlayDuelMusicSlow()
             {
                 musicSlow.Play();
             }
 
-            public void PlayFlagMusicMedium()
+            public void PlayDuelMusicMedium()
             {
                 musicMedium.Play();
             }
 
-            public void PlayFlagMusicFast()
+            public void PlayDuelMusicFast()
             {
                 musicFast.Play();
             }
 
-            public void PlayFlagMusicSuperFast()
+            public void PlayDuelMusicSuperFast()
             {
                 musicSuperFast.Play();
             }

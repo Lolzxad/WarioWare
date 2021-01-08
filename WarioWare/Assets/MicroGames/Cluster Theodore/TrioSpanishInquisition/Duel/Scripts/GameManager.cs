@@ -62,19 +62,19 @@ namespace SpanishInquisition
                 switch (bpm)
                 {
                     case 60:
-                        soundManager.PlayFlagMusicSlow();
+                        soundManager.PlayDuelMusicSlow();
                         break;
 
                     case 90:
-                        soundManager.PlayFlagMusicMedium();
+                        soundManager.PlayDuelMusicMedium();
                         break;
 
                     case 120:
-                        soundManager.PlayFlagMusicFast();
+                        soundManager.PlayDuelMusicFast();
                         break;
 
                     case 140:
-                        soundManager.PlayFlagMusicSuperFast();
+                        soundManager.PlayDuelMusicSuperFast();
                         break;
                 }
 
@@ -165,11 +165,13 @@ namespace SpanishInquisition
                     case 1:
                         if (Input.GetButtonDown("X_Button"))
                         {
+                            soundManager.PlayAttack();
                             Parry();
                         }
 
                         if (Input.GetButtonDown("Y_Button") || Input.GetButtonDown("B_Button"))
                         {
+                            soundManager.PlayAttack();
                             Fail();
                         }
                         break;
@@ -177,11 +179,13 @@ namespace SpanishInquisition
                     case 2:
                         if (Input.GetButtonDown("Y_Button"))
                         {
+                            soundManager.PlayAttack();
                             Parry();
                         }
 
                         if (Input.GetButtonDown("X_Button") || Input.GetButtonDown("B_Button"))
                         {
+                            soundManager.PlayAttack();
                             Fail();
 
                         }
@@ -190,11 +194,13 @@ namespace SpanishInquisition
                     case 3:
                         if (Input.GetButtonDown("B_Button"))
                         {
+                            soundManager.PlayAttack();
                             Parry();
                         }
 
                         if (Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button"))
                         {
+                            soundManager.PlayAttack();
                             Fail();
                         }
                         break;
@@ -216,6 +222,7 @@ namespace SpanishInquisition
             private void Parry()
             {
                 Debug.Log("Parry !");
+                soundManager.PlayParry();
                 numberOfParries++;
             }
 
@@ -232,16 +239,19 @@ namespace SpanishInquisition
 
                 if (currentParryButton == 1)
                 {
+                    soundManager.PlayPrepareAttack();
                     parryButton1.SetActive(true);
                 }
 
                 if (currentParryButton == 2)
                 {
+                    soundManager.PlayPrepareAttack();
                     parryButton2.SetActive(true);
                 }
 
                 if (currentParryButton == 3)
                 {
+                    soundManager.PlayPrepareAttack();
                     parryButton3.SetActive(true);
                 }
             }
