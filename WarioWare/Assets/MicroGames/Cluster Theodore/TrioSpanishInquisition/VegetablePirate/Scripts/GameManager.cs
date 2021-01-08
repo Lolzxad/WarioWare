@@ -38,6 +38,7 @@ namespace SpanishInquisition
             public GameObject victoryFeedback;
             public GameObject defeatFeedback;
             public GameObject explosionSprite;
+            public GameObject button;
             public Animator animatorPlayer;
             public Animator animatorThrower;
             public int objectsNumber;
@@ -74,7 +75,7 @@ namespace SpanishInquisition
                 cutParticle.GetComponent<ParticleSystem>();
                 fruitParticle.GetComponent<ParticleSystem>();
                 explosionParticle.GetComponent<ParticleSystem>();
-                speed = bpm / 5;
+                speed = bpm / 3;
                 soundManager = GetComponentInChildren<SoundManager>();
                 baseSpawnPosition = spawner.transform.position;
 
@@ -208,6 +209,7 @@ namespace SpanishInquisition
                     {
                         neutralCursor.SetActive(false);
                         activeCursor.SetActive(true);
+                        button.SetActive(true);
 
                         if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X))
                         {
@@ -235,8 +237,9 @@ namespace SpanishInquisition
                         CutFail();
                     }
 
+                    button.SetActive(false);
                     activeCursor.SetActive(false);
-                    neutralCursor.SetActive(true);
+                    neutralCursor.SetActive(true);                    
                     //Cooldown 0.5 tick
                     StartCoroutine(StartCooldown());
                 }                                             

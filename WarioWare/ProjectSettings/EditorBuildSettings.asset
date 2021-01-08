@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MicroGames/Cluster Theodore/TrioSpanishInquisition/VegetablePirate/VegetablePirate.unity
     guid: 090f472027b26f14d988c0016316069a
+  - enabled: 1
+    path: Assets/MicroGames/Cluster Theodore/TrioSpanishInquisition/Duel/Duel.unity
+    guid: 88e34718e0cc169479c18b1e17a70ecf
   m_configObjects: {}

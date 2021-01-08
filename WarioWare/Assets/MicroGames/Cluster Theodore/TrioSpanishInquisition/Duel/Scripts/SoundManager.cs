@@ -69,8 +69,8 @@ namespace SpanishInquisition
 
             public void PlayAttack()
             {
-                //katanaCut.Play();
-                Debug.Log("Son Katana");
+                enemyAttack.Play();
+                Debug.Log("Attaque");
             }
 
             public void PlayVictory()
@@ -87,8 +87,8 @@ namespace SpanishInquisition
 
             public void PlayPrepareAttack()
             {
-                //objectThrown.Play();
-                Debug.Log("Son objet lancé");
+                prepareAttack.Play();
+                Debug.Log("Préparation attaque");
             }
 
             public void PlayDuelMusicSlow()
@@ -109,12 +109,6 @@ namespace SpanishInquisition
             public void PlayDuelMusicSuperFast()
             {
                 musicSuperFast.Play();
-            }
-
-            public void PlayBombNoise()
-            {
-                //bombNoise.Play();
-                Debug.Log("Son bombe");
             }
         }
     }
