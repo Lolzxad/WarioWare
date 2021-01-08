@@ -28,12 +28,21 @@ namespace SpanishInquisition
                 }
             }
 
-            public GameObject[] scoreDisplays;
+            //public GameObject[] scoreDisplays;
             public GameObject parryButton1;
             public GameObject parryButton2;
             public GameObject parryButton3;
             public GameObject victoryFeedback;
             public GameObject defeatFeedback;
+            public GameObject parentButton;
+            public bool[] showButtons; 
+           
+            public Animator playerAnimator;
+            public Animator enemyAnimator;
+
+            public ParticleSystem victoryParticle;
+            public ParticleSystem bloodParticle;
+            public ParticleSystem parryParticle;
 
             private int numberOfParries;
             public int parriesNeeded = 2;
@@ -90,6 +99,7 @@ namespace SpanishInquisition
 
                         neutralTime = 1;
                         parriesNeeded = 3;
+
                         break;
 
                     case Difficulty.HARD:
@@ -98,6 +108,9 @@ namespace SpanishInquisition
                         parriesNeeded = 6;
                         break;
                 }
+
+
+                parentButton.SetActive(showButtons[(int)currentDifficulty]);
                 tickBeforeNextParry = neutralTime;
                 //DisplayScore();               
             }
@@ -129,6 +142,10 @@ namespace SpanishInquisition
 
                 if ((Tick < 8 && !gameIsWon) && !gameIsFinished)
                 {
+                    playerAnimator.SetBool("Parrying", false);
+                    enemyAnimator.SetBool("isParried", false);
+                    enemyAnimator.SetInteger("Direction", 0);
+
                     if (currentParryButton != 0)
                     {
                         Fail();
@@ -224,6 +241,9 @@ namespace SpanishInquisition
                 Debug.Log("Parry !");
                 soundManager.PlayParry();
                 numberOfParries++;
+                playerAnimator.SetBool("Parrying", true);
+                enemyAnimator.SetBool("isParried", true);
+                parryParticle.Play();
             }
 
             private void Fail()
@@ -236,11 +256,12 @@ namespace SpanishInquisition
             private void ParryRandomizer()
             {
                 currentParryButton = Random.Range(1, 4);
+                enemyAnimator.SetInteger("Direction", currentParryButton);
 
                 if (currentParryButton == 1)
                 {
                     soundManager.PlayPrepareAttack();
-                    parryButton1.SetActive(true);
+                    parryButton1.SetActive(true);                  
                 }
 
                 if (currentParryButton == 2)
@@ -267,13 +288,18 @@ namespace SpanishInquisition
                 {
                     //Win feedback
                     soundManager.PlayVictory();
-                    //victoryFeedback.SetActive(true);
+                    victoryFeedback.SetActive(true);
+                    enemyAnimator.SetBool("hasWon", true);
+                    victoryParticle.Play();
                 }
                 else
                 {
                     //Loss feedback
                     soundManager.PlayDefeat();
-                    //defeatFeedback.SetActive(true);
+                    defeatFeedback.SetActive(true);
+                    playerAnimator.SetBool("hasLost", true);
+                    enemyAnimator.SetBool("isParried", true);
+                    bloodParticle.Play();
                 }
             }
 
