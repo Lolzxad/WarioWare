@@ -39,6 +39,7 @@ namespace SpanishInquisition
             public GameObject defeatFeedback;
             public GameObject explosionSprite;
             public GameObject button;
+            public GameObject buttonTransparent;
             public Animator animatorPlayer;
             public Animator animatorThrower;
             public int objectsNumber;
@@ -210,6 +211,7 @@ namespace SpanishInquisition
                         neutralCursor.SetActive(false);
                         activeCursor.SetActive(true);
                         button.SetActive(true);
+                        buttonTransparent.SetActive(false);
 
                         if (Input.GetButtonDown("X_Button") || Input.GetKeyDown(KeyCode.X))
                         {
@@ -238,6 +240,7 @@ namespace SpanishInquisition
                     }
 
                     button.SetActive(false);
+                    buttonTransparent.SetActive(true);
                     activeCursor.SetActive(false);
                     neutralCursor.SetActive(true);                    
                     //Cooldown 0.5 tick
