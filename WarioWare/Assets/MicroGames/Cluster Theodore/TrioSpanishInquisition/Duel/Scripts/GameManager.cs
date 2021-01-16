@@ -232,8 +232,11 @@ namespace SpanishInquisition
                 if(currentParryButton >= 1 && currentParryButton <= 3 && Input.GetButtonDown("X_Button") || Input.GetButtonDown("Y_Button") || Input.GetButtonDown("B_Button"))
                 {
                     parryButton1.SetActive(false);
+                    parryButtonTransparent1.SetActive(true);
                     parryButton2.SetActive(false);
+                    parryButtonTransparent2.SetActive(true);
                     parryButton3.SetActive(false);
+                    parryButtonTransparent3.SetActive(true);
                     currentParryButton = 0;
                     tickBeforeNextParry = neutralTime;
                 }
