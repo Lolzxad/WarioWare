@@ -85,15 +85,15 @@ namespace SpanishInquisition
                         soundManager.PlayFlagMusicSlow();
                         break;
 
-                    case 90:
+                    case 80:
                         soundManager.PlayFlagMusicMedium();
                         break;
 
-                    case 120:
+                    case 100:
                         soundManager.PlayFlagMusicFast();
                         break;
 
-                    case 140:
+                    case 120:
                         soundManager.PlayFlagMusicSuperFast();
                         break;
                 }
@@ -137,6 +137,7 @@ namespace SpanishInquisition
                 {
                     gameIsFinished = true;
                     gameIsWon = true;
+                    canCut = false;
                     if (!endFeedbackPlayed)
                     {
                         EndOfGameFeedback();
@@ -160,11 +161,6 @@ namespace SpanishInquisition
                 if (Tick == 8)
                 {
                     Manager.Instance.Result (gameIsWon);
-                }
-
-                if ((Tick == 8 && !gameIsWon) || gameIsFinished)
-                {
-                    
                 }
             }
              
