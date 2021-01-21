@@ -77,15 +77,15 @@ namespace SpanishInquisition
                         soundManager.PlayDuelMusicSlow();
                         break;
 
-                    case 90:
+                    case 80:
                         soundManager.PlayDuelMusicMedium();
                         break;
 
-                    case 120:
+                    case 100:
                         soundManager.PlayDuelMusicFast();
                         break;
 
-                    case 140:
+                    case 120:
                         soundManager.PlayDuelMusicSuperFast();
                         break;
                 }
