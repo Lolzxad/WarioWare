@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idCard: {fileID: 11400000, guid: 83eb64f181c83e34f8849c532865939d, type: 2}
-  bpm: 120
+  bpm: 140
   currentDifficulty: 0
   panel: {fileID: 137554992}
   resultText: {fileID: 224949527}

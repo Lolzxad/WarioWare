@@ -69,7 +69,7 @@ namespace SpanishInquisition
 
                 speed = bpm / 5;
                 soundManager = GetComponentInChildren<SoundManager>();
-
+                soundManager.PlayBackgroundNoise();
 
                 switch (bpm)
                 {
